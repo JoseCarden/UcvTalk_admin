@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>OPCIONES DE GRAFICOS</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">OPCIONES DE GRAFICOS</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-button (click)="goToProfesRegister()">Registro de Profesionales</ion-button>
+    <ion-button (click)="goToCalificaProfes()">Calificacion Profesionales</ion-button> 
+    <ion-button (click)="goToReporteEstudiante()">Reporte de Estudiantes</ion-button> 
+    <ion-button (click)="goToDiagnosticoEstudiante()">Diagnostico de Estudiantes</ion-button> 
+  </div>
+
+</ion-content>

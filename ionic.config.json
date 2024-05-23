@@ -1,0 +1,7 @@
+{
+  "name": "UcvTalk_IO",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

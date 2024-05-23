@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      UCV TALK - ADMINISTRACION
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">UCV TALK - ADMINISTRACION</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-button (click)="goToLoginAdministrador()">Iniciar sesión</ion-button>
+  <ion-button (click)="goToLogupAdministrador()">Registrarte</ion-button> 
+
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col *ngFor = "let estudiante of estudiantes; let i = index">
+
+        <ion-card>
+          <ion-card-subtitle 
+            class="ion-padding-horizontal
+                   ion-padding-top"
+            *ngIf="estudiante.Correo">
+            <span>{{estudiante.Id_EstudianteRegis}} - </span>
+            <span>{{estudiante.Correo}}</span>
+          </ion-card-subtitle>
+
+          <ion-card-title class="ion-padding-horizontal ion-padding-top">
+            {{estudiante.Usuario}}
+          </ion-card-title>
+
+          <ion-card-content>
+            Último mensaje
+          </ion-card-content>
+
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+</ion-content>
