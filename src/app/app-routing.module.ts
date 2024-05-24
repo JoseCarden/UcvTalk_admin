@@ -39,6 +39,14 @@ const routes: Routes = [
     path: 'califica-profes',
     loadChildren: () => import('./pages/califica-profes/califica-profes.module').then( m => m.CalificaProfesPageModule)
   },
+  {
+    path: 'diagnostico-estudiante',
+    loadChildren: () => import('./pages/diagnostico-estudiante/diagnostico-estudiante.module').then( m => m.DiagnosticoEstudiantePageModule)
+  },
+  {
+    path: 'reporte-estudiante',
+    loadChildren: () => import('./pages/reporte-estudiante/reporte-estudiante.module').then( m => m.ReporteEstudiantePageModule)
+  },
 ];
 
 @NgModule({
