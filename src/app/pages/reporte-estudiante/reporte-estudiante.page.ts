@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js/auto';
+import {Chart} from 'chart.js/auto';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
