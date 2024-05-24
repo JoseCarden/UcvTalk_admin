@@ -33,51 +33,52 @@ export class LoginAdministradorPage implements OnInit {
   
   async goToOptions(){
 
-    //Obtener valores del form
-    var form = this.formLoginAdministrador.value;
+    // //Obtener valores del form
+    // var form = this.formLoginAdministrador.value;
 
-    //Advertencia a falta de algún campo
-    if(this.formLoginAdministrador.invalid){
-      const alert = await this.alertCrl.create({
-        header: 'Faltan datos',
-        message: 'Tienes que rellenar campos',
-        buttons: ['Aceptar']
-      });
-      await alert.present();
-      return;
-    }
+    // //Advertencia a falta de algún campo
+    // if(this.formLoginAdministrador.invalid){
+    //   const alert = await this.alertCrl.create({
+    //     header: 'Faltan datos',
+    //     message: 'Tienes que rellenar campos',
+    //     buttons: ['Aceptar']
+    //   });
+    //   await alert.present();
+    //   return;
+    // }
 
-    //Creación de estructura JSON para login
-    var logAdmin = {
-      Correo: form.correo,
-      Usuario:  form.usuario,
-      Contra: form.password
-    }
+    // //Creación de estructura JSON para login
+    // var logAdmin = {
+    //   Correo: form.correo,
+    //   Usuario:  form.usuario,
+    //   Contra: form.password
+    // }
 
-    //Validación de credenciales
-    try{
-      const resp = await firstValueFrom(this.admService.loginAdmin(logAdmin));//llamada y transformación del servicio
+    // //Validación de credenciales
+    // try{
+    //   const resp = await firstValueFrom(this.admService.loginAdmin(logAdmin));//llamada y transformación del servicio
 
-      if(resp.Correo && resp.Usuario && resp.Contra){//¿La respuesta tiene estos campos?
+    //   if(resp.Correo && resp.Usuario && resp.Contra){//¿La respuesta tiene estos campos?
 
-        this.navCtrl.navigateForward('/options'); //Si es así, redirección a pagina
+    //     this.navCtrl.navigateForward('/options'); //Si es así, redirección a pagina
 
-      }else{
-        throw new Error('Admin no encontrado');
-      }
+    //   }else{
+    //     throw new Error('Admin no encontrado');
+    //   }
 
-    }catch (error){
-      //Toast de error
-      const toast = await this.toastCtrl.create({
-        message: 'Credenciales incorrectas',
-        duration: 3000,
-        position: 'bottom'
-      });
-      toast.present();
+    // }catch (error){
+    //   //Toast de error
+    //   const toast = await this.toastCtrl.create({
+    //     message: 'Credenciales incorrectas',
+    //     duration: 3000,
+    //     position: 'bottom'
+    //   });
+    //   toast.present();
       
-      //Borrado de campos
-      this.formLoginAdministrador.reset();
-    }
+    //   //Borrado de campos
+    //   this.formLoginAdministrador.reset();
+    // }
+    this.navCtrl.navigateForward('/options');
   }
 
 }
