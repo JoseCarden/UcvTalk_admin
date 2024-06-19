@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js/auto';
+import { Chart } from 'chart.js/auto';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -16,9 +16,9 @@ export class CalificaProfesPage implements OnInit {
   }
 
   getDataAndCreatePieChart() {
-    this.http.get<any[]>('http://localhost:3000/repor-estudiante').subscribe(data => {
-      const asuntos = data.map(item => item.Asunto);
-      const counts = this.countOccurrences(asuntos);
+    this.http.get<any[]>('http://localhost:3000/calificar-profe').subscribe(data => {
+      const calificaciones = data.map(item => item.Calificacion);
+      const counts = this.countOccurrences(calificaciones);
       this.createPieChart(counts);
     });
   }
@@ -40,7 +40,7 @@ export class CalificaProfesPage implements OnInit {
       data: {
         labels: labels,
         datasets: [{
-          label: 'Asuntos',
+          label: 'Calificaciones',
           data: data,
           backgroundColor: [
             'red',
