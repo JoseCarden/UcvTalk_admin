@@ -61,6 +61,7 @@ export class LoginAdministradorPage implements OnInit {
       if(resp.Correo && resp.Usuario && resp.Contra){//¿La respuesta tiene estos campos?
 
         this.navCtrl.navigateForward('/options'); //Si es así, redirección a pagina
+        this.formLoginAdministrador.reset();
 
       }else{
         throw new Error('Admin no encontrado');
