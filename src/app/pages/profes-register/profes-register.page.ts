@@ -110,40 +110,46 @@ export class ProfesRegisterPage implements OnInit {
   goBack() {
     this.navCtrl.back();
   }
-
   imprimir() {
     const chartContainer = document.getElementById('myBarChartContainer');
     if (chartContainer) {
       html2canvas(chartContainer).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const doc = new jsPDF();
-        
+  
         // Agregar título
         doc.setFontSize(18);
         doc.text('REGISTRO PROFESIONALES', 105, 20, { align: 'center' });
-        
+  
         // Calcular posición del gráfico para centrarlo verticalmente
         const imgProps = doc.getImageProperties(imgData);
         const pdfWidth = doc.internal.pageSize.getWidth();
         const pdfHeight = doc.internal.pageSize.getHeight();
         const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        const positionY = (pdfHeight - imgHeight) / 2;
-
-        // Agregar gráfico
+  
+        // Ajustar la posición vertical del gráfico
+        const positionY = 33; // Puedes ajustar este valor para mover el gráfico más cerca o más lejos del texto
+  
+        // Agregar gráfico debajo del título
         doc.addImage(imgData, 'PNG', 10, positionY, pdfWidth - 20, imgHeight);
-
-        // Agregar fecha y hora de descarga
+  
+        // Agregar fecha y hora de descarga en la misma línea
         const date = new Date();
         const dateStr = date.toLocaleDateString();
         const timeStr = date.toLocaleTimeString();
+        const text = `Fecha de descarga: ${dateStr}  |  Hora de descarga: ${timeStr}`;
+        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor; // Estimación del ancho del texto
+        const textX = (pdfWidth - textWidth) / 2; // Centrar el texto horizontalmente
         doc.setFontSize(10);
-        doc.text(`Fecha de descarga: ${dateStr}`, 10, pdfHeight - 10);
-        doc.text(`Hora de descarga: ${timeStr}`, pdfWidth - 60, pdfHeight - 10);
-
+        doc.text(text, textX, positionY + imgHeight + 20); // Ajustar la posición vertical según sea necesario
+  
         doc.save('grafico.pdf');
       });
     } else {
       console.error("El contenedor del gráfico no fue encontrado.");
     }
   }
+  
+  
+  
 }

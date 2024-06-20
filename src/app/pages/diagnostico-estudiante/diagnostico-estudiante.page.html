@@ -1,16 +1,22 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>DiagnosticoEstudiante</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">DiagnosticoEstudiante</ion-title>
+  <video autoplay muted loop id="video-background" preload="auto">
+    <source src="../assets/Videos/fondo8.mp4" type="video/mp4">
+    Tu navegador no soporta la etiqueta de video.
+  </video>
+
+  <ion-header>
+    <ion-toolbar class="custom-toolbar">
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="bold-title">Diagnostico de Estudiantes</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div id="myBarChartContainer">
+  <h1 class="title">GRAFICO</h1>
+  <div id="myBarChartContainer" class="chart-container enlarged-chart">
     <canvas id="myBarChart"></canvas>
-</div>
+  </div>  
+  <ion-button class="imprimir-button" expand="full" (click)="imprimir()">IMPRIMIR</ion-button>
 </ion-content>
