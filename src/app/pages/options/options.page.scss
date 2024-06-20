@@ -1,0 +1,96 @@
+/* Custom styles for video background */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    animation: moveBackground 10s linear infinite alternate;
+  }
+  
+  ion-content {
+    position: relative;
+    z-index: 1; /* Ensure the content is in front of the video */
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh; /* Ocupa toda la altura de la ventana */
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: white;
+    font-weight: bold; /* Aplica negrita al título */
+  }
+  
+  .data-label {
+    width: 25%;
+    font-weight: bold;
+    text-align: center;
+    transform: translate(0, -160px); /* Ajusta según sea necesario */
+  }
+  
+  .data-label1 {
+    width: 25%;
+    text-align: center;
+    transform: translate(0, -160px); /* Ajusta según sea necesario */
+    font-size: 10em; /* Ajusta el tamaño de la letra según tus necesidades */
+    font-weight: bold; /* Hace que el texto sea negrita */
+    padding: 10px; /* Opcional: Añade un poco de espacio interno para que el borde no esté pegado al texto */
+  }
+  
+  .button-container ion-button {
+    margin: 25px;
+    width: 70%;
+    height: 120px;
+    font-size: 1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .data-input {
+    width: 15%; /* Ocupa todo el ancho del label */
+    margin: 25px;
+    transform: translate(0, -160px); /* Ajusta según sea necesario */
+    text-align: center;
+    background-color: white; /* Fondo blanco */
+    padding: 15px; /* Añade un poco de espacio interno para separar el texto del borde */
+    color: black; /* Color del texto negro */
+    font-weight: bold;
+  }
+  
+  .button-container ion-button.button-solid {
+    --background: rgb(52, 48, 165) !important; /* Sobrescribe el color de fondo */
+    --color: white !important; /* Sobrescribe el color del texto */
+  }
+  
+  .button-container ion-button.button-solid:hover {
+    --background: rgb(255, 0, 0) !important; /* Cambia el color de fondo al pasar el mouse */
+  }
+  
+  .button-icon {
+    display: block;
+    width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    margin-right: 20px; /* Ajusta la distancia entre la imagen y el texto */
+    float: left; /* Permite que la imagen flote a la izquierda dentro del botón */
+  }
+  
+  .button-text {
+    display: block;
+    overflow: hidden; /* Evita que el texto se superponga a la imagen */
+    text-align: center;
+    font-weight: bold;
+  }
+  

@@ -9,7 +9,6 @@ import { NavController } from '@ionic/angular';
 export class OptionsPage implements OnInit {
 
   constructor(private navCtrl: NavController) { }
-
   ngOnInit() {
   }
 
