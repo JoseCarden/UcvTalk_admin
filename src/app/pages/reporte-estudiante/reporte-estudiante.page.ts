@@ -34,7 +34,7 @@ export class ReporteEstudiantePage implements OnInit {
   }
 
   createPieChart(counts: { [key: string]: number }) {
-    const labels = Object.keys(counts).map(key => `${key} (${counts[key]})`); // Modificar las etiquetas para incluir las cantidades
+    const labels = Object.keys(counts).map(key => `${key} (${counts[key]})`);
     const data = Object.values(counts);
     const ctx = document.getElementById('myPieChart') as HTMLCanvasElement;
     const myPieChart = new Chart(ctx, {
@@ -59,16 +59,16 @@ export class ReporteEstudiantePage implements OnInit {
         plugins: {
           tooltip: {
             callbacks: {
-              label: (context) => { // Mostrar la cantidad en la etiqueta del gráfico
+              label: (context) => {
                 const label = context.label || '';
                 const value = context.parsed || 0;
                 return `${label}: ${value}`;
               }
             }
           },
-          legend: { // Configuración para el estilo del texto de la leyenda
+          legend: { 
             labels: {
-              color: 'black', // Cambiar el color del texto a negro
+              color: 'black',
             }
           }
         }
@@ -82,44 +82,30 @@ export class ReporteEstudiantePage implements OnInit {
       html2canvas(chartContainer).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const doc = new jsPDF();
-  
-        // Agregar título
         doc.setFontSize(18);
         doc.text('GRAFICO DE ASUNTOS', 105, 20, { align: 'center' });
-  
-        // Calcular posición del gráfico para centrarlo verticalmente
         const imgProps = doc.getImageProperties(imgData);
         const pdfWidth = doc.internal.pageSize.getWidth();
         const pdfHeight = doc.internal.pageSize.getHeight();
         const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-  
-        // Ajustar la posición vertical del gráfico
-        const positionY = 33; // Puedes ajustar este valor para mover el gráfico más cerca o más lejos del texto
-  
-        // Agregar gráfico debajo del título
+        const positionY = 33;
         doc.addImage(imgData, 'PNG', 10, positionY, pdfWidth - 20, imgHeight);
-  
-        // Agregar fecha y hora de descarga en la misma línea
         const date = new Date();
         const dateStr = date.toLocaleDateString();
         const timeStr = date.toLocaleTimeString();
         const text = `Fecha de descarga: ${dateStr}  |  Hora de descarga: ${timeStr}`;
-        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor; // Estimación del ancho del texto
-        const textX = (pdfWidth - textWidth) / 2; // Centrar el texto horizontalmente
+        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor;
+        const textX = (pdfWidth - textWidth) / 2;
         doc.setFontSize(10);
-        doc.text(text, textX, positionY + imgHeight + 20); // Ajustar la posición vertical según sea necesario
-  
-        // Guardar el PDF en una variable de tipo Blob
+        doc.text(text, textX, positionY + imgHeight + 20);
         const pdfBlob = doc.output('blob');
-  
-        // Mostrar la ventana de descarga
+
         window.open(URL.createObjectURL(pdfBlob));
       });
     } else {
       console.error("El contenedor del gráfico no fue encontrado.");
     }
   }
-  
 
   goBack() {
     this.navCtrl.back();
