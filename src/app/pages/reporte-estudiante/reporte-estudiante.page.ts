@@ -75,7 +75,6 @@ export class ReporteEstudiantePage implements OnInit {
       }
     });
   }
-  
 
   imprimir() {
     const chartContainer = document.getElementById('myPieChart');
@@ -83,23 +82,23 @@ export class ReporteEstudiantePage implements OnInit {
       html2canvas(chartContainer).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const doc = new jsPDF();
-
+  
         // Agregar título
         doc.setFontSize(18);
         doc.text('GRAFICO DE ASUNTOS', 105, 20, { align: 'center' });
-
+  
         // Calcular posición del gráfico para centrarlo verticalmente
         const imgProps = doc.getImageProperties(imgData);
         const pdfWidth = doc.internal.pageSize.getWidth();
         const pdfHeight = doc.internal.pageSize.getHeight();
         const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
+  
         // Ajustar la posición vertical del gráfico
         const positionY = 33; // Puedes ajustar este valor para mover el gráfico más cerca o más lejos del texto
-
+  
         // Agregar gráfico debajo del título
         doc.addImage(imgData, 'PNG', 10, positionY, pdfWidth - 20, imgHeight);
-
+  
         // Agregar fecha y hora de descarga en la misma línea
         const date = new Date();
         const dateStr = date.toLocaleDateString();
@@ -109,13 +108,18 @@ export class ReporteEstudiantePage implements OnInit {
         const textX = (pdfWidth - textWidth) / 2; // Centrar el texto horizontalmente
         doc.setFontSize(10);
         doc.text(text, textX, positionY + imgHeight + 20); // Ajustar la posición vertical según sea necesario
-
-        doc.save('grafico.pdf');
+  
+        // Guardar el PDF en una variable de tipo Blob
+        const pdfBlob = doc.output('blob');
+  
+        // Mostrar la ventana de descarga
+        window.open(URL.createObjectURL(pdfBlob));
       });
     } else {
       console.error("El contenedor del gráfico no fue encontrado.");
     }
   }
+  
 
   goBack() {
     this.navCtrl.back();
