@@ -103,10 +103,6 @@ export class DiagnosticoEstudiantePage implements OnInit {
     }
   }
 
-  goToOptions() {
-    this.navCtrl.navigateForward('/options');
-  }
-
   goBack() {
     this.navCtrl.back();
   }
