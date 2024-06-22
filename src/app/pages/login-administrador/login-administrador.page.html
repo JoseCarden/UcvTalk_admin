@@ -1,57 +1,41 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>LoginAdministrador</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-      <ion-toolbar>
-        <ion-title size="large">LoginAdministrador</ion-title>
-      </ion-toolbar>
-    </ion-header>
-  
-    <form [formGroup]="formLoginAdministrador">
-      <br>
-      <ion-list>
-              
+<ion-content [fullscreen]="true">
+  <video autoplay muted loop id="video-background" preload="auto">
+    <source src="../assets/Videos/fondo6.mp4" type="video/mp4">
+  </video>
+  <div class="overlay">
+    <div class="form-container">
+      <form [formGroup]="formLoginAdministrador">
+        <br>  
         <ion-item>
           <ion-input 
             formControlName="correo"
             label="Correo"
-            type="email"
-            fill="solid"
             labelPlacement="floating"
-            email>
+            placeholder="Ingrese su correo">
           </ion-input>
         </ion-item>
-        
+        <br>      
         <ion-item>
           <ion-input 
             formControlName="usuario"
             label="Usuario"
-            fill="solid"
             labelPlacement="floating"
             placeholder="Ingrese su usuario">
           </ion-input>
         </ion-item>
-  
+        <br>     
         <ion-item>
           <ion-input 
             formControlName="password"
             label="Contraseña"
             type="password"
-            fill="solid"
             labelPlacement="floating"
             placeholder="Ingrese su contraseña">
           </ion-input>
         </ion-item>
-  
-      </ion-list>
-  
-    </form><br>
-  
-    <ion-button (click)="goToOptions()">Ingresar</ion-button>
-  
-  </ion-content>
-  
+        <br>        
+        <ion-button (click)="goToOptions()">Ingresar</ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>
