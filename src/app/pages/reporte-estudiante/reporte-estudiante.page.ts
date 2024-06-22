@@ -68,7 +68,7 @@ export class ReporteEstudiantePage implements OnInit {
           },
           legend: { 
             labels: {
-              color: 'black',
+              color: 'white',
             }
           }
         }

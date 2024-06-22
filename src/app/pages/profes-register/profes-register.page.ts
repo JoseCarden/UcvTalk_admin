@@ -92,7 +92,7 @@ export class ProfesRegisterPage implements OnInit {
         legendItem.innerHTML = `
           <div>
             <span style="display: inline-block; width: 10px; height: 10px; background-color: ${backgroundColors[index]};"></span>
-            <span style="font-size: 12px; margin-left: 5px;">${label}</span>
+            <span style="font-size: 12px; margin-left: 5px; color:white;">${label}</span>
           </div>
         `;
         legend.appendChild(legendItem);

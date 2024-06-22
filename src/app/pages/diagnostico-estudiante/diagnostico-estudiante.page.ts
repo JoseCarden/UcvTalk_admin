@@ -20,7 +20,7 @@ export class DiagnosticoEstudiantePage implements OnInit {
 
   getDataAndCreateBarChart() {
     this.http.get<any[]>('http://localhost:3000/diagnostico').subscribe(data => {
-      const diagnosticos = data.map(item => item.Diagnostico);
+      const diagnosticos = data.map(item => item.Id_Categoria);
       const counts = this.countOccurrences(diagnosticos);
       const labels = Object.keys(counts);
       const values = Object.values(counts);
@@ -51,7 +51,7 @@ export class DiagnosticoEstudiantePage implements OnInit {
     const myBarChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: labels,
+        labels: ['Depresion','Ansiedad','TDAH','Estres','TICS','TOC'],
         datasets: [{
           data: data,
           backgroundColor: backgroundColors,
@@ -86,13 +86,27 @@ export class DiagnosticoEstudiantePage implements OnInit {
       legend.style.marginTop = '10px';
       legend.style.textAlign = 'center';
       labels.forEach((label, index) => {
+        switch(label){
+          case '1':
+            label = 'Depresión';break;
+          case '2':
+              label = 'Ansiedad';break;
+          case '3':
+              label = 'TDAH';break;
+          case '4':
+              label = 'Estres';break;
+          case '5':
+              label = 'TICS';break;
+          case '6':
+              label = 'TOC';break;
+        }
         const legendItem = document.createElement('span');
         legendItem.style.display = 'inline-block';
         legendItem.style.marginRight = '10px';
         legendItem.innerHTML = `
           <div>
             <span style="display: inline-block; width: 10px; height: 10px; background-color: ${backgroundColors[index]};"></span>
-            <span style="font-size: 12px; margin-left: 5px;">${label}</span>
+            <span style="font-size: 12px; margin-left: 5px; color:white;">${label}</span>
           </div>
         `;
         legend.appendChild(legendItem);
