@@ -1,0 +1,163 @@
+/* Custom styles for video background */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    animation: moveBackground 10s linear infinite alternate;
+  }
+  
+  ion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh; /* Ocupa toda la altura de la ventana */
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: white;
+    font-weight: bold; /* Aplica negrita al título */
+  }
+  
+  
+  .data-label {
+    width: 25%;
+    font-weight: bold;
+    text-align: center;
+    transform: translate(0, -160px); /* Ajusta según sea necesario */
+  }
+  
+  .data-label1 {
+    width: 25%;
+    text-align: center;
+    transform: translate(0, -160px); /* Ajusta según sea necesario */
+    font-size: 10em; /* Ajusta el tamaño de la letra según tus necesidades */
+    font-weight: bold; /* Hace que el texto sea negrita */
+    padding: 10px; /* Opcional: Añade un poco de espacio interno para que el borde no esté pegado al texto */
+  }
+  
+  .button-container ion-button {
+    margin: 25px;
+    width: 70%;
+    height: 120px;
+    font-size: 1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .data-input {
+    width: 15%; /* Ocupa todo el ancho del label */
+    margin: 25px;
+    transform: translate(0, -160px); /* Ajusta según sea necesario */
+    text-align: center;
+    background-color: white; /* Fondo blanco */
+    padding: 15px; /* Añade un poco de espacio interno para separar el texto del borde */
+    color: black; /* Color del texto negro */
+    font-weight: bold;
+  }
+  
+  .button-container ion-button.button-solid {
+    --background: rgb(52, 48, 165) !important; /* Sobrescribe el color de fondo */
+    --color: white !important; /* Sobrescribe el color del texto */
+  }
+  
+  .button-container ion-button.button-solid:hover {
+    --background: rgb(255, 0, 0) !important; /* Cambia el color de fondo al pasar el mouse */
+  }
+  
+  .button-icon {
+    display: block;
+    width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    margin-right: 20px; /* Ajusta la distancia entre la imagen y el texto */
+    float: left; /* Permite que la imagen flote a la izquierda dentro del botón */
+  }
+  
+  .button-text {
+    display: block;
+    overflow: hidden; /* Evita que el texto se superponga a la imagen */
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Estilos para el contenedor del gráfico */
+  #myBarChartContainer {
+    width: 90%; /* Ajusta el ancho del contenedor del gráfico según tus necesidades */
+    height: 300px; /* Ajusta la altura del contenedor del gráfico según tus necesidades */
+    margin: auto; /* Centra el contenedor del gráfico horizontalmente */
+    background-color: rgb(0, 0, 0); /* Fondo blanco para el contenedor del gráfico */
+    margin-top: 130px; /* Ajusta el margen superior según tus necesidades */
+    border: 5px solid rgb(0, 0, 0); /* Agrega un borde negro alrededor del contenedor */
+    padding: 10px; /* Añade un padding para que el gráfico no esté pegado al borde */
+  }
+  
+  /* Estilos para el gráfico de barras */
+  #myBarChart {
+    width: 100%; /* El gráfico ocupa el ancho completo del contenedor */
+    height: 100%; /* El gráfico ocupa toda la altura del contenedor */
+  }
+  
+  .title-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .title {
+    text-align: center;
+    font-weight: bold;
+    transform: translate(0, 100px);
+  }
+  
+  .custom-toolbar {
+    --background: #9b1010; /* Cambia este valor al color que prefieras */
+    --color: #fff; /* Color del texto */
+  }
+  
+  .bold-title {
+    font-weight: bold;
+  }
+  
+  /* Estilos personalizados para el botón IMPRIMIR */
+  .imprimir-button {
+    width: 70%; /* Ajusta el ancho según tus necesidades */
+    height: 50px; /* Ajusta la altura según tus necesidades */
+    font-size: 1.2em; /* Tamaño del texto */
+    font-weight: bold; /* Pone negrilla al texto */
+    --background: rgb(52, 48, 165); /* Color de fondo predeterminado */
+    --color: white; /* Color del texto predeterminado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto; /* Centra el botón horizontalmente */
+    transform: translate(0, 90px);
+  }
+  
+  .imprimir-button:hover {
+    --background: rgb(255, 0, 0); /* Cambia el color de fondo al pasar el mouse */
+  }
+  
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Ajusta la altura según lo necesites */
+    transform: translate(0, 90px);
+  }
+

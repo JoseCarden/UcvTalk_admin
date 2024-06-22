@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Chart } from 'chart.js/auto';
+import { NavController } from '@ionic/angular';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-profes-register',
@@ -9,7 +12,7 @@ import { Chart } from 'chart.js/auto';
 })
 export class ProfesRegisterPage implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private navCtrl: NavController, private http: HttpClient) { }
 
   ngOnInit() {
     this.getDataAndCreateBarChart();
@@ -21,7 +24,7 @@ export class ProfesRegisterPage implements OnInit {
       const counts = this.countOccurrences(especialidades);
       const labels = Object.keys(counts);
       const values = Object.values(counts);
-      this.createBarChart(labels, values, data.length); // Pasar la cantidad de datos obtenidos
+      this.createBarChart(labels, values, data.length);
     });
   }
 
@@ -33,7 +36,6 @@ export class ProfesRegisterPage implements OnInit {
   }
 
   createBarChart(labels: string[], data: number[], dataLength: number) {
-    // Función para generar un color aleatorio
     const getRandomColor = () => {
       const letters = '0123456789ABCDEF';
       let color = '#';
@@ -42,20 +44,18 @@ export class ProfesRegisterPage implements OnInit {
       }
       return color;
     };
-
-    // Generar colores aleatorios para las barras
+  
     const backgroundColors = data.map(() => getRandomColor());
-
+  
     const ctx = document.getElementById('myBarChart') as HTMLCanvasElement;
     const myBarChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: labels,
         datasets: [{
-          // label: 'Especialidades',
           data: data,
           backgroundColor: backgroundColors,
-          hoverBackgroundColor: backgroundColors // Asignar el mismo color para evitar cambio en hover
+          hoverBackgroundColor: backgroundColors
         }]
       },
       options: {
@@ -66,31 +66,75 @@ export class ProfesRegisterPage implements OnInit {
         },
         plugins: {
           legend: {
-            display: false // Aquí se oculta la leyenda
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: (tooltipItem: any) => {
+                const value = tooltipItem.formattedValue;
+                return `${value}`;
+              }
+            }
           }
         }
       }
     });
-
-    // Agregar leyendas dinámicamente en línea
+  
     const chartContainer = document.getElementById('myBarChartContainer');
     if (chartContainer) {
       const legend = document.createElement('div');
-      legend.style.marginTop = '10px'; // Espaciado entre las leyendas y el gráfico
-      legend.style.textAlign = 'center'; // Alinear al centro
+      legend.style.marginTop = '10px';
+      legend.style.textAlign = 'center';
       labels.forEach((label, index) => {
         const legendItem = document.createElement('span');
-        legendItem.style.display = 'inline-block'; // Mostrar en línea
-        legendItem.style.marginRight = '10px'; // Espacio entre leyendas
+        legendItem.style.display = 'inline-block';
+        legendItem.style.marginRight = '10px';
         legendItem.innerHTML = `
           <div>
             <span style="display: inline-block; width: 10px; height: 10px; background-color: ${backgroundColors[index]};"></span>
-            <span style="font-size: 12px; margin-left: 5px;">${label}</span>
+            <span style="font-size: 12px; margin-left: 5px; color:white;">${label}</span>
           </div>
         `;
         legend.appendChild(legendItem);
       });
       chartContainer.insertBefore(legend, chartContainer.firstChild);
+    } else {
+      console.error("El contenedor del gráfico no fue encontrado.");
+    }
+  }
+
+  goToOptions(){
+    this.navCtrl.navigateForward('/options');
+  }
+
+  goBack() {
+    this.navCtrl.back();
+  }
+  imprimir() {
+    const chartContainer = document.getElementById('myBarChartContainer');
+    if (chartContainer) {
+      html2canvas(chartContainer).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const doc = new jsPDF();
+        doc.setFontSize(18);
+        doc.text('REGISTRO PROFESIONALES', 105, 20, { align: 'center' });
+        const imgProps = doc.getImageProperties(imgData);
+        const pdfWidth = doc.internal.pageSize.getWidth();
+        const pdfHeight = doc.internal.pageSize.getHeight();
+        const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        const positionY = 33;
+        doc.addImage(imgData, 'PNG', 10, positionY, pdfWidth - 20, imgHeight);
+        const date = new Date();
+        const dateStr = date.toLocaleDateString();
+        const timeStr = date.toLocaleTimeString();
+        const text = `Fecha de descarga: ${dateStr}  |  Hora de descarga: ${timeStr}`;
+        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor;
+        const textX = (pdfWidth - textWidth) / 2;
+        doc.setFontSize(10);
+        doc.text(text, textX, positionY + imgHeight + 20); 
+  
+        doc.save('grafico.pdf');
+      });
     } else {
       console.error("El contenedor del gráfico no fue encontrado.");
     }
