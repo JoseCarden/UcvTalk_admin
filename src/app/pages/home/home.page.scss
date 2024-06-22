@@ -1,27 +1,40 @@
-#container {
-  text-align: center;
-
-  position: absolute;
+#video-background {
+  position: fixed;
+  top: 0;
   left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Esto asegura que el video cubra toda el área */
+  z-index: -1; /* Envía el video al fondo */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-content {
+  position: relative;
+  z-index: 1; /* Ensure the content is in front of the video */
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  position: relative;
+  z-index: 1;
+  margin-top: 18vh; /* Ajusta la distancia desde la parte superior */
 }
 
-#container a {
-  text-decoration: none;
+.button-container ion-button {
+  margin: 20px;
+  width: 65%;
+  }
+
+  
+.button-container ion-button.button-solid {
+--background: rgb(52, 48, 165) !important; /* Sobrescribe el color de fondo a rojo */
+--color: white !important; /* Sobrescribe el color del texto a blanco */
+}
+
+.button-container ion-button.button-solid:hover {
+--background: rgb(255, 0, 0) !important; /* Cambia el color de fondo al pasar el mouse */
 }
