@@ -1,163 +1,356 @@
 /* Custom styles for video background */
 #video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    animation: moveBackground 10s linear infinite alternate;
-  }
-  
-  ion-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Ocupa toda la altura de la pantalla */
-  }
-  
-  .button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 90vh; /* Ocupa toda la altura de la ventana */
-    position: relative;
-    z-index: 1;
-    text-align: center;
-  }
-  
-  .title {
-    font-size: 1.5em;
-    margin-bottom: 1em;
-    color: white;
-    font-weight: bold; /* Aplica negrita al título */
-  }
-  
-  
-  .data-label {
-    width: 25%;
-    font-weight: bold;
-    text-align: center;
-    transform: translate(0, -160px); /* Ajusta según sea necesario */
-  }
-  
-  .data-label1 {
-    width: 25%;
-    text-align: center;
-    transform: translate(0, -160px); /* Ajusta según sea necesario */
-    font-size: 10em; /* Ajusta el tamaño de la letra según tus necesidades */
-    font-weight: bold; /* Hace que el texto sea negrita */
-    padding: 10px; /* Opcional: Añade un poco de espacio interno para que el borde no esté pegado al texto */
-  }
-  
-  .button-container ion-button {
-    margin: 25px;
-    width: 70%;
-    height: 120px;
-    font-size: 1em;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .data-input {
-    width: 15%; /* Ocupa todo el ancho del label */
-    margin: 25px;
-    transform: translate(0, -160px); /* Ajusta según sea necesario */
-    text-align: center;
-    background-color: white; /* Fondo blanco */
-    padding: 15px; /* Añade un poco de espacio interno para separar el texto del borde */
-    color: black; /* Color del texto negro */
-    font-weight: bold;
-  }
-  
-  .button-container ion-button.button-solid {
-    --background: rgb(52, 48, 165) !important; /* Sobrescribe el color de fondo */
-    --color: white !important; /* Sobrescribe el color del texto */
-  }
-  
-  .button-container ion-button.button-solid:hover {
-    --background: rgb(255, 0, 0) !important; /* Cambia el color de fondo al pasar el mouse */
-  }
-  
-  .button-icon {
-    display: block;
-    width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
-    margin-right: 20px; /* Ajusta la distancia entre la imagen y el texto */
-    float: left; /* Permite que la imagen flote a la izquierda dentro del botón */
-  }
-  
-  .button-text {
-    display: block;
-    overflow: hidden; /* Evita que el texto se superponga a la imagen */
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  /* Estilos para el contenedor del gráfico */
-  #myBarChartContainer {
-    width: 90%; /* Ajusta el ancho del contenedor del gráfico según tus necesidades */
-    height: 300px; /* Ajusta la altura del contenedor del gráfico según tus necesidades */
-    margin: auto; /* Centra el contenedor del gráfico horizontalmente */
-    background-color: rgb(0, 0, 0); /* Fondo blanco para el contenedor del gráfico */
-    margin-top: 130px; /* Ajusta el margen superior según tus necesidades */
-    border: 5px solid rgb(0, 0, 0); /* Agrega un borde negro alrededor del contenedor */
-    padding: 10px; /* Añade un padding para que el gráfico no esté pegado al borde */
-  }
-  
-  /* Estilos para el gráfico de barras */
-  #myBarChart {
-    width: 100%; /* El gráfico ocupa el ancho completo del contenedor */
-    height: 100%; /* El gráfico ocupa toda la altura del contenedor */
-  }
-  
-  .title-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .title {
-    text-align: center;
-    font-weight: bold;
-    transform: translate(0, 100px);
-  }
-  
-  .custom-toolbar {
-    --background: #9b1010; /* Cambia este valor al color que prefieras */
-    --color: #fff; /* Color del texto */
-  }
-  
-  .bold-title {
-    font-weight: bold;
-  }
-  
-  /* Estilos personalizados para el botón IMPRIMIR */
-  .imprimir-button {
-    width: 70%; /* Ajusta el ancho según tus necesidades */
-    height: 50px; /* Ajusta la altura según tus necesidades */
-    font-size: 1.2em; /* Tamaño del texto */
-    font-weight: bold; /* Pone negrilla al texto */
-    --background: rgb(52, 48, 165); /* Color de fondo predeterminado */
-    --color: white; /* Color del texto predeterminado */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px auto; /* Centra el botón horizontalmente */
-    transform: translate(0, 90px);
-  }
-  
-  .imprimir-button:hover {
-    --background: rgb(255, 0, 0); /* Cambia el color de fondo al pasar el mouse */
-  }
-  
-  .chart-container {
-    position: relative;
-    width: 100%;
-    height: 400px; /* Ajusta la altura según lo necesites */
-    transform: translate(0, 90px);
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  animation: moveBackground 10s linear infinite alternate;
+}
 
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  padding: 0; /* Elimina el padding para que el contenido esté alineado con el borde */
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh; /* Ocupa toda la altura de la ventana */
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  color: white;
+  font-weight: bold; /* Aplica negrita al título */
+}
+
+.data-label {
+  width: 25%;
+  font-weight: bold;
+  text-align: center;
+  transform: translate(0, -160px); /* Ajusta según sea necesario */
+}
+
+.data-label1 {
+  width: 25%;
+  text-align: center;
+  transform: translate(0, -160px); /* Ajusta según sea necesario */
+  font-size: 10em; /* Ajusta el tamaño de la letra según tus necesidades */
+  font-weight: bold; /* Hace que el texto sea negrita */
+  padding: 10px; /* Opcional: Añade un poco de espacio interno para que el borde no esté pegado al texto */
+}
+
+.button-container ion-button {
+  margin: 25px;
+  width: 70%;
+  height: 120px;
+  font-size: 1em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.data-input {
+  width: 15%; /* Ocupa todo el ancho del label */
+  margin: 25px;
+  transform: translate(0, -160px); /* Ajusta según sea necesario */
+  text-align: center;
+  background-color: white; /* Fondo blanco */
+  padding: 15px; /* Añade un poco de espacio interno para separar el texto del borde */
+  color: black; /* Color del texto negro */
+  font-weight: bold;
+}
+
+.button-container ion-button.button-solid {
+  --background: rgb(52, 48, 165) !important; /* Sobrescribe el color de fondo */
+  --color: white !important; /* Sobrescribe el color del texto */
+}
+
+.button-container ion-button.button-solid:hover {
+  --background: rgb(255, 0, 0) !important; /* Cambia el color de fondo al pasar el mouse */
+}
+
+.button-icon {
+  display: block;
+  width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
+  margin-right: 20px; /* Ajusta la distancia entre la imagen y el texto */
+  float: left; /* Permite que la imagen flote a la izquierda dentro del botón */
+}
+
+.button-text {
+  display: block;
+  overflow: hidden; /* Evita que el texto se superponga a la imagen */
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Estilos para el contenedor del gráfico */
+#myBarChartContainer {
+  width: 90%; /* Ajusta el ancho del contenedor del gráfico según tus necesidades */
+  height: 300px; /* Ajusta la altura del contenedor del gráfico según tus necesidades */
+  margin: auto; /* Centra el contenedor del gráfico horizontalmente */
+  background-color: rgb(0, 0, 0); /* Fondo blanco para el contenedor del gráfico */
+  margin-top: 130px; /* Ajusta el margen superior según tus necesidades */
+  border: 5px solid rgb(0, 0, 0); /* Agrega un borde negro alrededor del contenedor */
+  padding: 10px; /* Añade un padding para que el gráfico no esté pegado al borde */
+}
+
+/* Estilos para el gráfico de barras */
+#myBarChart {
+  width: 100%; /* El gráfico ocupa el ancho completo del contenedor */
+  height: 100%; /* El gráfico ocupa toda la altura del contenedor */
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  transform: translate(0, 100px);
+}
+
+.custom-toolbar {
+  --background: #9b1010; /* Cambia este valor al color que prefieras */
+  --color: #fff; /* Color del texto */
+}
+
+.bold-title {
+  font-weight: bold;
+}
+
+
+.imprimir-button:hover {
+  --background: rgb(255, 0, 0); /* Cambia el color de fondo al pasar el mouse */
+}
+
+.bold-title {
+  font-weight: bold;
+}
+
+// .table-container {
+//   background-color: white; /* Color de fondo para la tabla */
+//   border: 2px solid #ccc; /* Borde alrededor de la tabla */
+//   margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+//   padding: 10px; /* Añade espacio interno */
+// }
+
+.custom-table {
+  width: 100%; /* Ajusta el ancho completo de la tabla */
+}
+
+// .header-row {
+//   background-color: red; /* Color de fondo de la fila de encabezados */
+//   color: white; /* Color del texto de los encabezados */
+//   font-weight: bold; /* Aplica negrita al texto de los encabezados */
+//   text-align: center; /* Alinea el texto al centro */
+//   border-bottom: 2px solid #000000; /* Borde inferior de la fila de encabezados */
+// }
+
+.data-row {
+  background-color: #f9f9f9; /* Color de fondo de las filas de datos */
+  color: black; /* Color del texto de los datos */
+  text-align: center; /* Alinea el texto al centro */
+  border-bottom: 2px solid #000000; /* Borde inferior para separar las filas */
+}
+
+ion-col {
+  padding: 8px; /* Espacio interno en las celdas */
+  font-weight: bold; /* Aplica negrita al texto de las celdas */
+}
+
+ion-col:nth-child(1) {
+  flex: 1 0 10%; /* Ancho de la primera columna (ID) */
+}
+
+ion-col:nth-child(2) {
+  flex: 1 0 25%; /* Ancho de la segunda columna (Nombre) */
+}
+
+ion-col:nth-child(3) {
+  flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
+}
+
+ion-col:nth-child(4) {
+  flex: 1 0 40%; /* Ancho de la cuarta columna (Especialidad) */
+}
+
+/* Alinear el texto verticalmente al centro */
+ion-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black; /* Borde para cada fila */
+}
+
+.filter-row ion-col ion-item {
+  --ion-color-base: #9b1010; /* Cambia el color base del ion-item */
+}
+
+.filter-row ion-col ion-input {
+  --placeholder-color: rgb(255, 0, 0); /* Cambia el color del placeholder del ion-input a negro */
+  --border-color: white; /* Cambia el color del borde del ion-input */
+  --background: rgba(247, 247, 247); /* Cambia el color de fondo del ion-input */
+  --background-focused: rgba(255, 255, 255, 0.5); /* Cambia el color de fondo del ion-input al enfocarse */
+}
+
+.filter-container {
+  position: relative; /* Asegura que las propiedades left o right funcionen */
+  left: 0%; /* Mueve el contenedor hacia la izquierda un 10% del ancho de su contenedor padre */
+  display: flex; /* Utiliza flexbox para colocar los elementos en una línea */
+  justify-content: center; /* Centra horizontalmente el contenedor */
+  align-items: center; /* Centra verticalmente los elementos dentro del contenedor */
+  background-color: transparent !important; /* Fondo completamente transparente */
+  padding: 20px; /* Espacio interno */
+  border-radius: 10px; /* Bordes redondeados */
+  margin: -15px auto; /* Margen exterior, con 'auto' para centrar horizontalmente */
+  width: 100%; /* Ancho del contenedor al 100% del ancho disponible */
+  max-width: 130%; /* Ancho máximo del contenedor, ajusta según tu preferencia */
+}
+
+.filter-title {
+  font-weight: bold; /* Texto en negrita para los títulos */
+  margin-bottom: 6px; /* Espacio inferior entre los títulos y los inputs */
+  width: 70%; /* Ancho del título */
+}
+
+ion-item {
+  --background: transparent !important; /* Fondo transparente para ion-item */
+  margin-bottom: 12px; /* Espacio inferior entre los campos de filtro */
+  width: 70%; /* Ancho del ion-item */
+}
+
+ion-input {
+  --background: rgb(255, 255, 255); /* Fondo blanco */
+  width: 100%; /* Ancho completo del input */
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ffffff; /* Borde ligero */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1); /* Borde interior suave */
+  color: #000000; /* Color del texto negro */
+}
+
+ion-input::placeholder {
+  color: #999999; /* Color del placeholder gris */
+}
+
+.custom-table {
+  margin-top: 20px; /* Espacio superior para separar de los filtros */
+}
+
+// .header-row {
+//   background-color: red; /* Color de fondo de la fila de encabezados */
+//   color: white; /* Color del texto de los encabezados */
+//   font-weight: bold; /* Aplica negrita al texto de los encabezados */
+//   text-align: center; /* Alinea el texto al centro */
+//   border-bottom: 2px solid #000000; /* Borde inferior de la fila de encabezados */
+// }
+
+// .data-row {
+//   background-color: #f9f9f9; /* Color de fondo de las filas de datos */
+//   color: black; /* Color del texto de los datos */
+//   text-align: center; /* Alinea el texto al centro */
+//   border-bottom: 2px solid #000000; /* Borde inferior para separar las filas */
+// }
+
+/* Estilos personalizados para el botón IMPRIMIR */
+.imprimir-button {
+  width: 70%; /* Ajusta el ancho según tus necesidades */
+  height: 50px; /* Ajusta la altura según tus necesidades */
+  font-size: 1.2em; /* Tamaño del texto */
+  font-weight: bold; /* Pone negrilla al texto */
+  --background: rgb(52, 48, 165); /* Color de fondo predeterminado */
+  --color: white; /* Color del texto predeterminado */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto; /* Centra el botón horizontalmente */
+}
+
+.imprimir-button:hover {
+  --background: rgb(255, 0, 0); /* Cambia el color de fondo al pasar el mouse */
+}
+
+ion-col {
+  padding: 8px; /* Espacio interno en las celdas */
+  font-weight: bold; /* Aplica negrita al texto de las celdas */
+}
+
+ion-col:nth-child(1) {
+  flex: 1 0 10%; /* Ancho de la primera columna (ID) */
+}
+
+ion-col:nth-child(2) {
+  flex: 1 0 25%; /* Ancho de la segunda columna (Nombre) */
+}
+
+ion-col:nth-child(3) {
+  flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
+}
+
+ion-col:nth-child(4) {
+  flex: 1 0 40%; /* Ancho de la cuarta columna (Especialidad) */
+}
+
+/* Alinear el texto verticalmente al centro */
+ion-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-row ion-col {
+  border-right: 3px solid #000000; /* Borde derecho de las columnas en la fila de encabezado */
+  width: 33.33%; /* Ancho de cada columna en la fila de encabezado */
+}
+
+.header-row ion-col:last-child {
+  border-right: none; /* Elimina el borde derecho de la última columna en la fila de encabezado */
+}
+
+.data-row ion-col {
+  border-right: 3px solid #0a0a0a; /* Ajusta el grosor y color de la línea entre columnas en las filas de datos */
+}
+
+.data-row ion-col:last-child {
+  border-right: none; /* Elimina el borde derecho de la última columna en las filas de datos */
+}
+
+.ion-col {
+  display: flex; /* Usa flexbox para que los contenidos se expandan verticalmente */
+  align-items: center; /* Centra verticalmente el contenido de las columnas */
+  padding: 10px; /* Añade un padding para separar el contenido de los bordes */
+  min-height: 60px; /* Altura mínima para asegurar que todas las celdas tengan al menos esta altura */
+}
+
+.header-row ion-col, .data-row ion-col {
+  border-right: 3px solid #0a0a0a; /* Ajusta el grosor y color de la línea entre columnas */
+  padding-right: 6px; /* Añade un espacio entre las columnas para que la línea sea más visible */
+  display: flex; /* Usa flexbox para manejar la altura de la línea */
+  align-items: stretch; /* Asegura que las columnas se extiendan para ocupar toda la altura */
+}
+
+.header-row ion-col:last-child, .data-row ion-col:last-child {
+  border-right: none; /* Elimina el borde derecho de la última columna */
+}

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js/auto';
 import { HttpClient } from '@angular/common/http';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { NavController } from '@ionic/angular';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-reporte-estudiante-profes',
@@ -12,103 +11,73 @@ import { NavController } from '@ionic/angular';
 })
 export class ReporteEstudiantePage implements OnInit {
 
+  reportes: any[] = [];
+  descripcionFiltro: string = '';
+  asuntoFiltro: string = '';
+
   constructor(private http: HttpClient, private navCtrl: NavController) { }
 
   ngOnInit() {
-    this.getDataAndCreatePieChart();
-  }
-
-  getDataAndCreatePieChart() {
-    this.http.get<any[]>('http://localhost:3000/repor-estudiante').subscribe(data => {
-      const asuntos = data.map(item => item.Asunto);
-      const counts = this.countOccurrences(asuntos);
-      this.createPieChart(counts);
-    });
-  }
-
-  countOccurrences(arr: any[]): { [key: string]: number } {
-    return arr.reduce((acc, val) => {
-      acc[val] = acc[val] ? acc[val] + 1 : 1;
-      return acc;
-    }, {});
-  }
-
-  createPieChart(counts: { [key: string]: number }) {
-    const labels = Object.keys(counts).map(key => `${key} (${counts[key]})`);
-    const data = Object.values(counts);
-    const ctx = document.getElementById('myPieChart') as HTMLCanvasElement;
-    const myPieChart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Asuntos',
-          data: data,
-          backgroundColor: [
-            'red',
-            'blue',
-            'yellow',
-            'green',
-            'purple',
-            'orange'
-          ],
-          hoverOffset: 4
-        }]
-      },
-      options: {
-        plugins: {
-          tooltip: {
-            callbacks: {
-              label: (context) => {
-                const label = context.label || '';
-                const value = context.parsed || 0;
-                return `${label}: ${value}`;
-              }
-            }
-          },
-          legend: { 
-            labels: {
-              color: 'black',
-            }
-          }
-        }
-      }
-    });
-  }
-
-  imprimir() {
-    const chartContainer = document.getElementById('myPieChart');
-    if (chartContainer) {
-      html2canvas(chartContainer).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const doc = new jsPDF();
-        doc.setFontSize(18);
-        doc.text('GRAFICO DE ASUNTOS', 105, 20, { align: 'center' });
-        const imgProps = doc.getImageProperties(imgData);
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = doc.internal.pageSize.getHeight();
-        const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        const positionY = 33;
-        doc.addImage(imgData, 'PNG', 10, positionY, pdfWidth - 20, imgHeight);
-        const date = new Date();
-        const dateStr = date.toLocaleDateString();
-        const timeStr = date.toLocaleTimeString();
-        const text = `Fecha de descarga: ${dateStr}  |  Hora de descarga: ${timeStr}`;
-        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor;
-        const textX = (pdfWidth - textWidth) / 2;
-        doc.setFontSize(10);
-        doc.text(text, textX, positionY + imgHeight + 20);
-        const pdfBlob = doc.output('blob');
-
-        window.open(URL.createObjectURL(pdfBlob));
-      });
-    } else {
-      console.error("El contenedor del gráfico no fue encontrado.");
-    }
+    this.loadReportes();
   }
 
   goBack() {
     this.navCtrl.back();
   }
 
+  loadReportes() {
+    this.http.get('http://localhost:3000/repor-estudiante').subscribe((data: any) => {
+      this.reportes = data;
+    }, error => {
+      console.error('Error loading reportes', error);
+    });
+  }
+
+  filtrarReportes() {
+    return this.reportes.filter(reporte => {
+      const matchesDescripcion = reporte.Descripcion.toLowerCase().includes(this.descripcionFiltro.toLowerCase());
+      if (this.asuntoFiltro === '') {
+        return matchesDescripcion;
+      } else {
+        const matchesAsunto = reporte.Asunto.toLowerCase() === this.asuntoFiltro.toLowerCase();
+        return matchesDescripcion && matchesAsunto;
+      }
+    });
+  }
+
+  imprimir() {
+    const doc = new jsPDF();
+
+    // Title
+    doc.setFontSize(18);
+    doc.text('Reporte de Estudiantes', 105, 20, { align: 'center' });
+
+    // Table
+    const data = this.filtrarReportes().map(reporte => [
+      reporte.Id_Reporte,
+      reporte.Descripcion,
+      reporte.Asunto,
+    ]);
+
+    autoTable(doc, {
+      head: [['ID', 'Descripción', 'Asunto']],
+      body: data,
+      startY: 30,
+      theme: 'grid',
+      headStyles: { fillColor: [255, 0, 0] },
+      didDrawPage: function (data) {
+        // Footer
+        const date = new Date();
+        const dateStr = date.toLocaleDateString();
+        const timeStr = date.toLocaleTimeString();
+        const text = `Fecha de descarga: ${dateStr}  |  Hora de descarga: ${timeStr}`;
+        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor;
+        const textX = (doc.internal.pageSize.getWidth() - textWidth) / 2;
+        doc.setFontSize(10);
+        doc.text(text, textX, doc.internal.pageSize.getHeight() - 10);
+      }
+    });
+
+    doc.save('ReporteEstudiantes.pdf');
+  }
 }
