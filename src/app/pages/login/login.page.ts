@@ -13,14 +13,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  // goToLoginEstudiante(){
-  //   this.navCtrl.navigateForward('/login-estudiante');
-  // }
-
-  // goToLoginProfesional(){
-  //   this.navCtrl.navigateForward('/login-profesional');
-  // }
-
   goToLoginAdministrador(){
     this.navCtrl.navigateForward('/login-administrador');
   }
