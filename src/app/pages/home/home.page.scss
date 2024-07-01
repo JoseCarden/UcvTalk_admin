@@ -21,14 +21,14 @@ ion-content {
   height:100%;
   position: relative;
   z-index: 1;
-  margin-top: 18vh; /* Ajusta la distancia desde la parte superior */
+  margin-top: 23vh; /* Ajusta la distancia desde la parte superior */
 }
+
 
 .button-container ion-button {
   margin: 20px;
   width: 65%;
   }
-
   
 .button-container ion-button.button-solid {
 --background: rgb(52, 48, 165) !important; /* Sobrescribe el color de fondo a rojo */

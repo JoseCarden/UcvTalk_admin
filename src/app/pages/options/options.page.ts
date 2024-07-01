@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-options',
@@ -8,8 +8,34 @@ import { NavController } from '@ionic/angular';
 })
 export class OptionsPage implements OnInit {
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private alertController: AlertController) { }
+
   ngOnInit() {
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'CERRAR SESION',
+      message: '¿Seguro que quieres cerrar sesión?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            this.goToHome();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  goBack() {
+    this.presentAlert();
   }
 
   goToProfesRegister(){
@@ -26,6 +52,10 @@ export class OptionsPage implements OnInit {
 
   goToDiagnosticoEstudiante(){
     this.navCtrl.navigateForward('/diagnostico-estudiante');
+  }
+
+  goToHome(){
+    this.navCtrl.navigateForward('/home');
   }
 
 }

@@ -2,6 +2,11 @@
   <video autoplay muted loop id="video-background" preload="auto">
     <source src="../assets/Videos/fondo7.mp4" type="video/mp4">
   </video>
+  <div class="back-button-container">
+    <ion-button fill="clear" (click)="goBack()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+  </div>
   <div class="button-container">
     <h1 class="title">GRAFICOS</h1>
     <ion-button expand="block" (click)="goToProfesRegister()">

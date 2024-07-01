@@ -29,6 +29,10 @@ export class LogupAdministradorPage implements OnInit {
   ngOnInit() {
   }
 
+  goBack() {
+    this.navCtrl.back();
+  }
+
   async registrarAdministrador(){
 
     //Obtener valores del form
