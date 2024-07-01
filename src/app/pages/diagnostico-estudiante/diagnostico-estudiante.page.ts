@@ -12,6 +12,8 @@ import autoTable from 'jspdf-autotable';
 export class DiagnosticoEstudiantePage implements OnInit {
 
   diagnosticos: any[] = [];
+  estudiantes: any[] = [];
+  categorias: any[] = [];
   usuarioFiltro: string = '';
   diagnosticoFiltro: string = '';
 
@@ -19,6 +21,9 @@ export class DiagnosticoEstudiantePage implements OnInit {
 
   ngOnInit() {
     this.loadDiagnosticos();
+    this.loadEstudiantes();
+    this.loadCategorias(); // Cargar categorías al inicializar el componente
+    this.diagnosticoFiltro = ''; // Establecer el filtro inicialmente a 'Ninguno'
   }
 
   goBack() {
@@ -33,34 +38,80 @@ export class DiagnosticoEstudiantePage implements OnInit {
     });
   }
 
+  loadEstudiantes() {
+    this.http.get('http://localhost:3000/estudiante').subscribe((data: any) => {
+      this.estudiantes = data;
+    }, error => {
+      console.error('Error loading estudiantes', error);
+    });
+  }
+
+  loadCategorias() {
+    this.http.get('http://localhost:3000/categoria').subscribe((data: any) => {
+      this.categorias = data;
+    }, error => {
+      console.error('Error loading categorias', error);
+    });
+  }
+
+  // filtrarDiagnosticos() {
+  //   return this.diagnosticos.filter(diagnostico => {
+  //     const matchesUsuario = diagnostico.Est_Usuario.toLowerCase().includes(this.usuarioFiltro.toLowerCase());
+  //     if (this.diagnosticoFiltro === '') {
+  //       return matchesUsuario;
+  //     } else if (this.diagnosticoFiltro === 'Ninguno') {
+  //       return matchesUsuario;
+  //     } else {
+  //       const matchesDiagnostico = diagnostico.Diagnostico.toLowerCase() === this.diagnosticoFiltro.toLowerCase();
+  //       return matchesUsuario && matchesDiagnostico;
+  //     }
+  //   });
+  // }
+
   filtrarDiagnosticos() {
     return this.diagnosticos.filter(diagnostico => {
       const matchesUsuario = diagnostico.Est_Usuario.toLowerCase().includes(this.usuarioFiltro.toLowerCase());
-      if (this.diagnosticoFiltro === '') {
+      const categoria = this.categorias.find(cat => cat.Nombre_Cat === this.diagnosticoFiltro); // Buscar la categoría seleccionada
+      const categoriaId = categoria ? categoria.Id_Categoria : null; // Obtener el Id_Categoria si se encontró la categoría
+  
+      if (!categoriaId) {
         return matchesUsuario;
       } else {
-        const matchesDiagnostico = diagnostico.Diagnostico.toLowerCase() === this.diagnosticoFiltro.toLowerCase();
-        return matchesUsuario && matchesDiagnostico;
+        return matchesUsuario && diagnostico.Id_Categoria === categoriaId;
       }
+    });
+  }
+  
+
+  combinarDatos() {
+    return this.filtrarDiagnosticos().map(diagnostico => {
+      const estudiante = this.estudiantes.find(est => est.Id_EstudianteRegis === diagnostico.Id_EstudianteRegis);
+      const categoria = this.categorias.find(cat => cat.Id_Categoria === diagnostico.Id_Categoria);
+      return {
+        ...diagnostico,
+        idUcv_estu: estudiante ? estudiante.idUcv_estu : '',
+        Id_Categoria: categoria ? categoria.Nombre_Cat : ''
+      };
     });
   }
 
   imprimir() {
     const doc = new jsPDF();
-
+  
     // Title
     doc.setFontSize(18);
-    doc.text('Diagnostico de Estudiantes', 105, 20, { align: 'center' });
-
+    doc.text('Diagnóstico de Estudiantes', 105, 20, { align: 'center' });
+  
     // Table
-    const data = this.filtrarDiagnosticos().map(diagnostico => [
-      diagnostico.Id_EstudianteRegis,
+    const data = this.combinarDatos().map(diagnostico => [
+      diagnostico.idUcv_estu,
       diagnostico.Est_Usuario,
-      diagnostico.Diagnostico,
+      diagnostico.Id_Categoria,
+      diagnostico.Diagnostico
     ]);
-
+  
     autoTable(doc, {
-      head: [['ID', 'E.U', 'Diagnóstico']],
+      head: [['ID E.', 'Estado Usuario', 'Categoría', 'Diagnóstico']],
       body: data,
       startY: 30,
       theme: 'grid',
@@ -77,7 +128,8 @@ export class DiagnosticoEstudiantePage implements OnInit {
         doc.text(text, textX, doc.internal.pageSize.getHeight() - 10);
       }
     });
-
+  
     doc.save('DiagnosticoEstudiantes.pdf');
   }
+  
 }

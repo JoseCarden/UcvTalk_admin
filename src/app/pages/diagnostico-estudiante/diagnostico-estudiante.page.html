@@ -9,7 +9,7 @@
           <ion-icon name="arrow-back"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title class="bold-title">Diagnostico de Estudiantes</ion-title>
+      <ion-title class="bold-title">Diagnóstico de Estudiantes</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -22,18 +22,13 @@
       <ion-input placeholder="Ingrese el usuario" [(ngModel)]="usuarioFiltro"></ion-input>
     </ion-item>
     <ion-item>
-      <!-- Aquí ajustamos el placeholder del ion-label -->
-      <ion-label class="filter-title" position="stacked" style="pointer-events: none;">Diagnóstico</ion-label>
-      <ion-select placeholder="Seleccione el diagnóstico" [(ngModel)]="diagnosticoFiltro" interface="popover" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+      <ion-label class="filter-title" position="stacked" style="pointer-events: none;">Categoría</ion-label>
+      <ion-select placeholder="Seleccione la categoría" [(ngModel)]="diagnosticoFiltro" interface="popover" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
         <ion-select-option value="">Ninguno</ion-select-option>
-        <ion-select-option value="Depresion">Depresion</ion-select-option>
-        <ion-select-option value="Ansiedad">Ansiedad</ion-select-option>
-        <ion-select-option value="TDAH">TDAH</ion-select-option>
-        <ion-select-option value="Estres">Estres</ion-select-option>
-        <ion-select-option value="TICS">TICS</ion-select-option>
-        <ion-select-option value="TOC">TOC</ion-select-option>
+        <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.Nombre_Cat">{{ categoria.Nombre_Cat }}</ion-select-option>
       </ion-select>
     </ion-item>
+    
   </ion-list>
   
   <!-- Texto "TABLA" centrado encima de la tabla y tamaño grande -->
@@ -44,15 +39,18 @@
     <ion-row class="header-row">
       <ion-col>ID E.</ion-col>
       <ion-col>E.U.</ion-col>
+      <ion-col>Categoria</ion-col>
       <ion-col>Diagnóstico</ion-col>
     </ion-row>
-
-    <!-- Datos filtrados -->
-    <ion-row *ngFor="let diagnostico of filtrarDiagnosticos()" class="data-row">
-      <ion-col>{{ diagnostico.Id_EstudianteRegis }}</ion-col>
+  
+    <!-- Datos combinados -->
+    <ion-row *ngFor="let diagnostico of combinarDatos()" class="data-row">
+      <ion-col>{{ diagnostico.idUcv_estu }}</ion-col>
       <ion-col>{{ diagnostico.Est_Usuario }}</ion-col>
+      <ion-col>{{ diagnostico.Id_Categoria }}</ion-col>
       <ion-col>{{ diagnostico.Diagnostico }}</ion-col>
     </ion-row>
   </ion-grid>
+  
   <ion-button class="imprimir-button" expand="full" (click)="imprimir()">IMPRIMIR</ion-button>
 </ion-content>

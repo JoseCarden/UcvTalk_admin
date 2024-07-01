@@ -188,19 +188,19 @@ ion-col {
 }
 
 ion-col:nth-child(1) {
-  flex: 1 0 10%; /* Ancho de la primera columna (ID) */
+  flex: 1 0 4%; /* Ancho de la primera columna (ID) */
 }
 
 ion-col:nth-child(2) {
-  flex: 1 0 25%; /* Ancho de la segunda columna (Nombre) */
+  flex: 1 0 6%; /* Ancho de la segunda columna (Nombre) */
 }
 
 ion-col:nth-child(3) {
-  flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
+  flex: 1 0 10%; /* Ancho de la tercera columna (Apellido) */
 }
 
 ion-col:nth-child(4) {
-  flex: 1 0 40%; /* Ancho de la cuarta columna (Especialidad) */
+  flex: 1 0 10%; /* Ancho de la cuarta columna (Especialidad) */
 }
 
 /* Alinear el texto verticalmente al centro */
