@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Chart } from 'chart.js/auto';
 import { NavController } from '@ionic/angular';
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-diagnostico-estudiante',
@@ -12,144 +11,125 @@ import html2canvas from 'html2canvas';
 })
 export class DiagnosticoEstudiantePage implements OnInit {
 
+  diagnosticos: any[] = [];
+  estudiantes: any[] = [];
+  categorias: any[] = [];
+  usuarioFiltro: string = '';
+  diagnosticoFiltro: string = '';
+
   constructor(private navCtrl: NavController, private http: HttpClient) { }
 
   ngOnInit() {
-    this.getDataAndCreateBarChart();
-  }
-
-  getDataAndCreateBarChart() {
-    this.http.get<any[]>('http://localhost:3000/diagnostico').subscribe(data => {
-      const diagnosticos = data.map(item => item.Id_Categoria);
-      const counts = this.countOccurrences(diagnosticos);
-      const labels = Object.keys(counts);
-      const values = Object.values(counts);
-      this.createBarChart(labels, values, data.length);
-    });
-  }
-
-  countOccurrences(arr: any[]): { [key: string]: number } {
-    return arr.reduce((acc, val) => {
-      acc[val] = acc[val] ? acc[val] + 1 : 1;
-      return acc;
-    }, {});
-  }
-
-  createBarChart(labels: string[], data: number[], dataLength: number) {
-    const getRandomColor = () => {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    };
-
-    const backgroundColors = data.map(() => getRandomColor());
-
-    const ctx = document.getElementById('myBarChart') as HTMLCanvasElement;
-    const myBarChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Depresion','Ansiedad','TDAH','Estres','TICS','TOC'],
-        datasets: [{
-          data: data,
-          backgroundColor: backgroundColors,
-          hoverBackgroundColor: backgroundColors
-        }]
-      },
-      options: {
-        scales: {
-          x: {
-            beginAtZero: true
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            callbacks: {
-              label: (tooltipItem: any) => {
-                const value = tooltipItem.formattedValue;
-                return `${value}`;
-              }
-            }
-          }
-        }
-      }
-    });
-
-    const chartContainer = document.getElementById('myBarChartContainer');
-    if (chartContainer) {
-      const legend = document.createElement('div');
-      legend.style.marginTop = '10px';
-      legend.style.textAlign = 'center';
-      labels.forEach((label, index) => {
-        switch(label){
-          case '1':
-            label = 'Depresión';break;
-          case '2':
-              label = 'Ansiedad';break;
-          case '3':
-              label = 'TDAH';break;
-          case '4':
-              label = 'Estres';break;
-          case '5':
-              label = 'TICS';break;
-          case '6':
-              label = 'TOC';break;
-        }
-        const legendItem = document.createElement('span');
-        legendItem.style.display = 'inline-block';
-        legendItem.style.marginRight = '10px';
-        legendItem.innerHTML = `
-          <div>
-            <span style="display: inline-block; width: 10px; height: 10px; background-color: ${backgroundColors[index]};"></span>
-            <span style="font-size: 12px; margin-left: 5px; color:white;">${label}</span>
-          </div>
-        `;
-        legend.appendChild(legendItem);
-      });
-      chartContainer.insertBefore(legend, chartContainer.firstChild);
-    } else {
-      console.error("El contenedor del gráfico no fue encontrado.");
-    }
+    this.loadDiagnosticos();
+    this.loadEstudiantes();
+    this.loadCategorias(); // Cargar categorías al inicializar el componente
+    this.diagnosticoFiltro = ''; // Establecer el filtro inicialmente a 'Ninguno'
   }
 
   goBack() {
     this.navCtrl.back();
   }
 
-  imprimir() {
-    const chartContainer = document.getElementById('myBarChartContainer');
-    if (chartContainer) {
-      html2canvas(chartContainer).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const doc = new jsPDF();
-        doc.setFontSize(18);
-        doc.text('REGISTRO PROFESIONALES', 105, 20, { align: 'center' });
+  loadDiagnosticos() {
+    this.http.get('http://localhost:3000/diagnostico').subscribe((data: any) => {
+      this.diagnosticos = data;
+    }, error => {
+      console.error('Error loading diagnosticos', error);
+    });
+  }
 
-        const imgProps = doc.getImageProperties(imgData);
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = doc.internal.pageSize.getHeight();
-        const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        const positionY = 33; 
-        doc.addImage(imgData, 'PNG', 10, positionY, pdfWidth - 20, imgHeight);
+  loadEstudiantes() {
+    this.http.get('http://localhost:3000/estudiante').subscribe((data: any) => {
+      this.estudiantes = data;
+    }, error => {
+      console.error('Error loading estudiantes', error);
+    });
+  }
+
+  loadCategorias() {
+    this.http.get('http://localhost:3000/categoria').subscribe((data: any) => {
+      this.categorias = data;
+    }, error => {
+      console.error('Error loading categorias', error);
+    });
+  }
+
+  // filtrarDiagnosticos() {
+  //   return this.diagnosticos.filter(diagnostico => {
+  //     const matchesUsuario = diagnostico.Est_Usuario.toLowerCase().includes(this.usuarioFiltro.toLowerCase());
+  //     if (this.diagnosticoFiltro === '') {
+  //       return matchesUsuario;
+  //     } else if (this.diagnosticoFiltro === 'Ninguno') {
+  //       return matchesUsuario;
+  //     } else {
+  //       const matchesDiagnostico = diagnostico.Diagnostico.toLowerCase() === this.diagnosticoFiltro.toLowerCase();
+  //       return matchesUsuario && matchesDiagnostico;
+  //     }
+  //   });
+  // }
+
+  filtrarDiagnosticos() {
+    return this.diagnosticos.filter(diagnostico => {
+      const matchesUsuario = diagnostico.Est_Usuario.toLowerCase().includes(this.usuarioFiltro.toLowerCase());
+      const categoria = this.categorias.find(cat => cat.Nombre_Cat === this.diagnosticoFiltro); // Buscar la categoría seleccionada
+      const categoriaId = categoria ? categoria.Id_Categoria : null; // Obtener el Id_Categoria si se encontró la categoría
+  
+      if (!categoriaId) {
+        return matchesUsuario;
+      } else {
+        return matchesUsuario && diagnostico.Id_Categoria === categoriaId;
+      }
+    });
+  }
+  
+
+  combinarDatos() {
+    return this.filtrarDiagnosticos().map(diagnostico => {
+      const estudiante = this.estudiantes.find(est => est.Id_EstudianteRegis === diagnostico.Id_EstudianteRegis);
+      const categoria = this.categorias.find(cat => cat.Id_Categoria === diagnostico.Id_Categoria);
+      return {
+        ...diagnostico,
+        idUcv_estu: estudiante ? estudiante.idUcv_estu : '',
+        Id_Categoria: categoria ? categoria.Nombre_Cat : ''
+      };
+    });
+  }
+
+  imprimir() {
+    const doc = new jsPDF();
+  
+    // Title
+    doc.setFontSize(18);
+    doc.text('Diagnóstico de Estudiantes', 105, 20, { align: 'center' });
+  
+    // Table
+    const data = this.combinarDatos().map(diagnostico => [
+      diagnostico.idUcv_estu,
+      diagnostico.Est_Usuario,
+      diagnostico.Id_Categoria,
+      diagnostico.Diagnostico
+    ]);
+  
+    autoTable(doc, {
+      head: [['ID E.', 'Estado Usuario', 'Categoría', 'Diagnóstico']],
+      body: data,
+      startY: 30,
+      theme: 'grid',
+      headStyles: { fillColor: [255, 0, 0] },
+      didDrawPage: function (data) {
+        // Footer
         const date = new Date();
         const dateStr = date.toLocaleDateString();
         const timeStr = date.toLocaleTimeString();
         const text = `Fecha de descarga: ${dateStr}  |  Hora de descarga: ${timeStr}`;
-        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor; 
-        const textX = (pdfWidth - textWidth) / 2; 
+        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor;
+        const textX = (doc.internal.pageSize.getWidth() - textWidth) / 2;
         doc.setFontSize(10);
-        doc.text(text, textX, positionY + imgHeight + 20);
-
-        doc.save('grafico.pdf');
-      });
-    } else {
-      console.error("El contenedor del gráfico no fue encontrado.");
-    }
+        doc.text(text, textX, doc.internal.pageSize.getHeight() - 10);
+      }
+    });
+  
+    doc.save('DiagnosticoEstudiantes.pdf');
   }
+  
 }
-

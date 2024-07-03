@@ -3,14 +3,15 @@
     <source src="../assets/Videos/fondo4.mp4" type="video/mp4">
     Tu navegador no soporta la etiqueta de video.
   </video>
-  
+  <div class="back-button-container">
+    <ion-button fill="clear" (click)="goBack()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+  </div>
   <div class="overlay">
-
-
       <div class="form-container">
         <form [formGroup]="formLogupAdministrador">
           <ion-list>
-
       <ion-item>
         <ion-input 
           formControlName="correo"
@@ -19,8 +20,7 @@
           labelPlacement="floating"
           email>
         </ion-input>
-      </ion-item>
-      
+      </ion-item>   
       <ion-item>
         <ion-input 
           formControlName="usuario"
@@ -29,7 +29,6 @@
           placeholder="Ingrese su usuario">
         </ion-input>
       </ion-item>
-
       <ion-item>
         <ion-input 
           formControlName="password"
@@ -42,7 +41,6 @@
 
     </ion-list>
   </form>
-
   <ion-button (click)="registrarAdministrador()">Registrar</ion-button>
 </div>
 </div>

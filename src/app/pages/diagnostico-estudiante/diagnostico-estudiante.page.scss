@@ -36,7 +36,6 @@ ion-content {
   font-weight: bold; /* Aplica negrita al título */
 }
 
-
 .data-label {
   width: 25%;
   font-weight: bold;
@@ -153,8 +152,137 @@ ion-content {
   --background: rgb(255, 0, 0); /* Cambia el color de fondo al pasar el mouse */
 }
 
-.chart-container {
-  position: relative;
-  width: 100%;
-  height: 400px; /* Ajusta la altura según lo necesites */
+.bold-title {
+  font-weight: bold;
+}
+
+.table-container {
+  background-color: white; /* Color de fondo para la tabla */
+  border: 2px solid #ccc; /* Borde alrededor de la tabla */
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+  padding: 10px; /* Añade espacio interno */
+}
+
+.custom-table {
+  width: 100%; /* Ajusta el ancho completo de la tabla */
+}
+
+.header-row {
+  background-color: red; /* Color de fondo de la fila de encabezados */
+  color: white; /* Color del texto de los encabezados */
+  font-weight: bold; /* Aplica negrita al texto de los encabezados */
+  text-align: center; /* Alinea el texto al centro */
+  border-bottom: 2px solid #000000; /* Borde inferior de la fila de encabezados */
+}
+
+.data-row {
+  background-color: #f9f9f9; /* Color de fondo de las filas de datos */
+  color: black; /* Color del texto de los datos */
+  text-align: center; /* Alinea el texto al centro */
+  border-bottom: 2px solid #000000; /* Borde inferior para separar las filas */
+}
+
+ion-col {
+  padding: 8px; /* Espacio interno en las celdas */
+  font-weight: bold; /* Aplica negrita al texto de las celdas */
+}
+
+ion-col:nth-child(1) {
+  flex: 1 0 4%; /* Ancho de la primera columna (ID) */
+}
+
+ion-col:nth-child(2) {
+  flex: 1 0 6%; /* Ancho de la segunda columna (Nombre) */
+}
+
+ion-col:nth-child(3) {
+  flex: 1 0 10%; /* Ancho de la tercera columna (Apellido) */
+}
+
+ion-col:nth-child(4) {
+  flex: 1 0 10%; /* Ancho de la cuarta columna (Especialidad) */
+}
+
+/* Alinear el texto verticalmente al centro */
+ion-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+ion-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black; /* Borde para cada fila */
+}
+
+ion-col {
+  padding: 8px;
+  border: 1px solid black; /* Borde para cada celda */
+  font-weight: bold; /* Aplica negrilla al texto */
+}
+
+.filter-row ion-col ion-item {
+  --ion-color-base: #9b1010; /* Cambia el color base del ion-item */
+}
+
+.filter-row ion-col ion-input {
+  --placeholder-color: rgb(255, 0, 0); /* Cambia el color del placeholder del ion-input a negro */
+  --border-color: white; /* Cambia el color del borde del ion-input */
+  --background: rgba(247, 247, 247); /* Cambia el color de fondo del ion-input */
+  --background-focused: rgba(255, 255, 255, 0.5); /* Cambia el color de fondo del ion-input al enfocarse */
+}
+
+
+.filter-container {
+  position: relative; /* Asegura que las propiedades left o right funcionen */
+  left: 0%; /* Mueve el contenedor hacia la izquierda un 10% del ancho de su contenedor padre */
+  display: flex; /* Utiliza flexbox para colocar los elementos en una línea */
+  justify-content: center; /* Centra horizontalmente el contenedor */
+  align-items: center; /* Centra verticalmente los elementos dentro del contenedor */
+  background-color: transparent !important; /* Fondo completamente transparente */
+  padding: 20px; /* Espacio interno */
+  border-radius: 10px; /* Bordes redondeados */
+  margin: -15px auto; /* Margen exterior, con 'auto' para centrar horizontalmente */
+  width: 100%; /* Ancho del contenedor al 100% del ancho disponible */
+  max-width: 130%; /* Ancho máximo del contenedor, ajusta según tu preferencia */
+}
+
+.filter-title {
+  font-weight: bold; /* Texto en negrita para los títulos */
+  margin-bottom: 6px; /* Espacio inferior entre los títulos y los inputs */
+  width: 70%; /* Ancho del título */
+}
+
+ion-item {
+  --background: transparent !important; /* Fondo transparente para ion-item */
+  margin-bottom: 12px; /* Espacio inferior entre los campos de filtro */
+  width: 70%; /* Ancho del ion-item */
+}
+
+ion-input {
+  --background: rgb(255, 255, 255); /* Fondo blanco */
+  width: 100%; /* Ancho completo del input */
+  padding: 10px; /* Espaciado interno */
+  border: 1px solid #ffffff; /* Borde ligero */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1); /* Borde interior suave */
+  color: #000000; /* Color del texto negro */
+}
+
+ion-input::placeholder {
+  color: #999999; /* Color del placeholder gris */
+}
+
+.custom-table {
+  margin-top: 20px; /* Espacio superior para separar de los filtros */
+}
+ion-select {
+  --color: black; /* Cambia el color del texto de las opciones */
+}
+
+ion-select-option {
+  color: inherit; /* Asegura que herede el color del ion-select */
 }
