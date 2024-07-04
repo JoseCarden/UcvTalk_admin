@@ -135,6 +135,18 @@ ion-content {
   font-weight: bold;
 }
 
+.imprimir-button {
+  width: 70%; /* Ajusta el ancho según tus necesidades */
+  height: 50px; /* Ajusta la altura según tus necesidades */
+  font-size: 1.2em; /* Tamaño del texto */
+  font-weight: bold; /* Pone negrilla al texto */
+  --background: rgb(52, 48, 165); /* Color de fondo predeterminado */
+  --color: white; /* Color del texto predeterminado */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto; /* Centra el botón horizontalmente */
+}
 
 .imprimir-button:hover {
   --background: rgb(255, 0, 0); /* Cambia el color de fondo al pasar el mouse */
@@ -144,24 +156,9 @@ ion-content {
   font-weight: bold;
 }
 
-// .table-container {
-//   background-color: white; /* Color de fondo para la tabla */
-//   border: 2px solid #ccc; /* Borde alrededor de la tabla */
-//   margin-top: 20px; /* Ajusta el margen superior según sea necesario */
-//   padding: 10px; /* Añade espacio interno */
-// }
-
 .custom-table {
   width: 100%; /* Ajusta el ancho completo de la tabla */
 }
-
-// .header-row {
-//   background-color: red; /* Color de fondo de la fila de encabezados */
-//   color: white; /* Color del texto de los encabezados */
-//   font-weight: bold; /* Aplica negrita al texto de los encabezados */
-//   text-align: center; /* Alinea el texto al centro */
-//   border-bottom: 2px solid #000000; /* Borde inferior de la fila de encabezados */
-// }
 
 .data-row {
   background-color: #f9f9f9; /* Color de fondo de las filas de datos */
@@ -187,10 +184,6 @@ ion-col:nth-child(3) {
   flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
 }
 
-ion-col:nth-child(4) {
-  flex: 1 0 40%; /* Ancho de la cuarta columna (Especialidad) */
-}
-
 /* Alinear el texto verticalmente al centro */
 ion-col {
   display: flex;
@@ -199,11 +192,13 @@ ion-col {
 }
 
 ion-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 2px solid black; /* Borde para cada fila */
 }
+
+
+
+
+
 
 .filter-row ion-col ion-item {
   --ion-color-base: #9b1010; /* Cambia el color base del ion-item */
@@ -260,34 +255,9 @@ ion-input::placeholder {
   margin-top: 20px; /* Espacio superior para separar de los filtros */
 }
 
-// .header-row {
-//   background-color: red; /* Color de fondo de la fila de encabezados */
-//   color: white; /* Color del texto de los encabezados */
-//   font-weight: bold; /* Aplica negrita al texto de los encabezados */
-//   text-align: center; /* Alinea el texto al centro */
-//   border-bottom: 2px solid #000000; /* Borde inferior de la fila de encabezados */
-// }
 
-// .data-row {
-//   background-color: #f9f9f9; /* Color de fondo de las filas de datos */
-//   color: black; /* Color del texto de los datos */
-//   text-align: center; /* Alinea el texto al centro */
-//   border-bottom: 2px solid #000000; /* Borde inferior para separar las filas */
-// }
 
-/* Estilos personalizados para el botón IMPRIMIR */
-.imprimir-button {
-  width: 70%; /* Ajusta el ancho según tus necesidades */
-  height: 50px; /* Ajusta la altura según tus necesidades */
-  font-size: 1.2em; /* Tamaño del texto */
-  font-weight: bold; /* Pone negrilla al texto */
-  --background: rgb(52, 48, 165); /* Color de fondo predeterminado */
-  --color: white; /* Color del texto predeterminado */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px auto; /* Centra el botón horizontalmente */
-}
+
 
 .imprimir-button:hover {
   --background: rgb(255, 0, 0); /* Cambia el color de fondo al pasar el mouse */
@@ -310,9 +280,14 @@ ion-col:nth-child(3) {
   flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
 }
 
-ion-col:nth-child(4) {
-  flex: 1 0 40%; /* Ancho de la cuarta columna (Especialidad) */
-}
+
+
+
+
+
+
+
+
 
 /* Alinear el texto verticalmente al centro */
 ion-col {
@@ -320,6 +295,7 @@ ion-col {
   align-items: center;
   justify-content: center;
 }
+
 .header-row ion-col {
   border-right: 3px solid #000000; /* Borde derecho de las columnas en la fila de encabezado */
   width: 33.33%; /* Ancho de cada columna en la fila de encabezado */

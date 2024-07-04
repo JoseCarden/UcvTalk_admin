@@ -54,23 +54,10 @@ export class DiagnosticoEstudiantePage implements OnInit {
     });
   }
 
-  // filtrarDiagnosticos() {
-  //   return this.diagnosticos.filter(diagnostico => {
-  //     const matchesUsuario = diagnostico.Est_Usuario.toLowerCase().includes(this.usuarioFiltro.toLowerCase());
-  //     if (this.diagnosticoFiltro === '') {
-  //       return matchesUsuario;
-  //     } else if (this.diagnosticoFiltro === 'Ninguno') {
-  //       return matchesUsuario;
-  //     } else {
-  //       const matchesDiagnostico = diagnostico.Diagnostico.toLowerCase() === this.diagnosticoFiltro.toLowerCase();
-  //       return matchesUsuario && matchesDiagnostico;
-  //     }
-  //   });
-  // }
-
   filtrarDiagnosticos() {
     return this.diagnosticos.filter(diagnostico => {
-      const matchesUsuario = diagnostico.Est_Usuario.toLowerCase().includes(this.usuarioFiltro.toLowerCase());
+      const estudiante = this.estudiantes.find(est => est.Id_EstudianteRegis === diagnostico.Id_EstudianteRegis);
+      const matchesUsuario = estudiante ? estudiante.idUcv_estu.toLowerCase().includes(this.usuarioFiltro.toLowerCase()) : false;
       const categoria = this.categorias.find(cat => cat.Nombre_Cat === this.diagnosticoFiltro); // Buscar la categoría seleccionada
       const categoriaId = categoria ? categoria.Id_Categoria : null; // Obtener el Id_Categoria si se encontró la categoría
   
@@ -81,7 +68,6 @@ export class DiagnosticoEstudiantePage implements OnInit {
       }
     });
   }
-  
 
   combinarDatos() {
     return this.filtrarDiagnosticos().map(diagnostico => {
@@ -131,5 +117,4 @@ export class DiagnosticoEstudiantePage implements OnInit {
   
     doc.save('DiagnosticoEstudiantes.pdf');
   }
-  
 }
