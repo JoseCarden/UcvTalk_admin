@@ -16,6 +16,7 @@ ion-content {
   justify-content: center;
   align-items: center;
   height: 100vh; /* Ocupa toda la altura de la pantalla */
+  padding: 0; /* Elimina el padding para que el contenido esté alineado con el borde */
 }
 
 .button-container {
@@ -156,23 +157,8 @@ ion-content {
   font-weight: bold;
 }
 
-.table-container {
-  background-color: white; /* Color de fondo para la tabla */
-  border: 2px solid #ccc; /* Borde alrededor de la tabla */
-  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
-  padding: 10px; /* Añade espacio interno */
-}
-
 .custom-table {
   width: 100%; /* Ajusta el ancho completo de la tabla */
-}
-
-.header-row {
-  background-color: red; /* Color de fondo de la fila de encabezados */
-  color: white; /* Color del texto de los encabezados */
-  font-weight: bold; /* Aplica negrita al texto de los encabezados */
-  text-align: center; /* Alinea el texto al centro */
-  border-bottom: 2px solid #000000; /* Borde inferior de la fila de encabezados */
 }
 
 .data-row {
@@ -203,6 +189,10 @@ ion-col:nth-child(4) {
   flex: 1 0 40%; /* Ancho de la cuarta columna (Especialidad) */
 }
 
+
+
+
+
 /* Alinear el texto verticalmente al centro */
 ion-col {
   display: flex;
@@ -211,16 +201,7 @@ ion-col {
 }
 
 ion-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black; /* Borde para cada fila */
-}
-
-ion-col {
-  padding: 8px;
-  border: 1px solid black; /* Borde para cada celda */
-  font-weight: bold; /* Aplica negrilla al texto */
+  border: 2px solid black; /* Borde para cada fila */
 }
 
 .filter-row ion-col ion-item {
@@ -233,7 +214,6 @@ ion-col {
   --background: rgba(247, 247, 247); /* Cambia el color de fondo del ion-input */
   --background-focused: rgba(255, 255, 255, 0.5); /* Cambia el color de fondo del ion-input al enfocarse */
 }
-
 
 .filter-container {
   position: relative; /* Asegura que las propiedades left o right funcionen */
@@ -278,10 +258,87 @@ ion-input::placeholder {
 .custom-table {
   margin-top: 20px; /* Espacio superior para separar de los filtros */
 }
-ion-select {
-  --color: black; /* Cambia el color del texto de las opciones */
+
+.imprimir-button:hover {
+  --background: rgb(255, 0, 0); /* Cambia el color de fondo al pasar el mouse */
 }
 
-ion-select-option {
-  color: inherit; /* Asegura que herede el color del ion-select */
+// ion-select {
+//   --color: black; /* Cambia el color del texto de las opciones */
+// }
+
+// ion-select-option {
+//   color: inherit; /* Asegura que herede el color del ion-select */
+// }
+
+
+// ion-col {
+//   padding: 8px; /* Espacio interno en las celdas */
+//   font-weight: bold; /* Aplica negrita al texto de las celdas */
+// }
+
+// ion-col:nth-child(1) {
+//   flex: 1 0 10%; /* Ancho de la primera columna (ID) */
+// }
+
+// ion-col:nth-child(2) {
+//   flex: 1 0 25%; /* Ancho de la segunda columna (Nombre) */
+// }
+
+// ion-col:nth-child(3) {
+//   flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
+// }
+
+// ion-col:nth-child(4) {
+//   flex: 1 0 40%; /* Ancho de la tercera columna (Apellido) */
+// }
+
+
+
+
+
+
+
+
+
+/* Alinear el texto verticalmente al centro */
+ion-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-row ion-col {
+  border-right: 3px solid #000000; /* Borde derecho de las columnas en la fila de encabezado */
+  width: 33.33%; /* Ancho de cada columna en la fila de encabezado */
+}
+
+.header-row ion-col:last-child {
+  border-right: none; /* Elimina el borde derecho de la última columna en la fila de encabezado */
+}
+
+.data-row ion-col {
+  border-right: 3px solid #0a0a0a; /* Ajusta el grosor y color de la línea entre columnas en las filas de datos */
+}
+
+.data-row ion-col:last-child {
+  border-right: none; /* Elimina el borde derecho de la última columna en las filas de datos */
+}
+
+.ion-col {
+  display: flex; /* Usa flexbox para que los contenidos se expandan verticalmente */
+  align-items: center; /* Centra verticalmente el contenido de las columnas */
+  padding: 10px; /* Añade un padding para separar el contenido de los bordes */
+  min-height: 60px; /* Altura mínima para asegurar que todas las celdas tengan al menos esta altura */
+}
+
+.header-row ion-col, .data-row ion-col {
+  border-right: 3px solid #0a0a0a; /* Ajusta el grosor y color de la línea entre columnas */
+  padding-right: 6px; /* Añade un espacio entre las columnas para que la línea sea más visible */
+  display: flex; /* Usa flexbox para manejar la altura de la línea */
+  align-items: stretch; /* Asegura que las columnas se extiendan para ocupar toda la altura */
+}
+
+.header-row ion-col:last-child, .data-row ion-col:last-child {
+  border-right: none; /* Elimina el borde derecho de la última columna */
 }
