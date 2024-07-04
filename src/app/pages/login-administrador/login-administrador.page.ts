@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
-import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AdministradorService } from 'src/app/services/administrador.service';
-import { firstValueFrom , throwError } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login-administrador',
@@ -10,9 +10,8 @@ import { firstValueFrom , throwError } from 'rxjs';
   styleUrls: ['./login-administrador.page.scss'],
 })
 export class LoginAdministradorPage implements OnInit {
-
   formLoginAdministrador: FormGroup;
-  
+
   constructor(
     private navCtrl: NavController,
     private admService: AdministradorService,
@@ -21,22 +20,23 @@ export class LoginAdministradorPage implements OnInit {
     public fb: FormBuilder
   ) {
     this.formLoginAdministrador = this.fb.group({
-      'usuario': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required)
-    })
-   }
-
-  ngOnInit() {
+      'usuario': new FormControl('', Validators.required),
+      'password': new FormControl('', Validators.required)
+    });
   }
 
-  
-  async goToOptions(){
+  ngOnInit() {}
 
-    //Obtener valores del form
+  goBack() {
+    this.navCtrl.back();
+  }
+
+  async goToOptions() {
+    // Obtener valores del form
     var form = this.formLoginAdministrador.value;
 
-    //Advertencia a falta de algún campo
-    if(this.formLoginAdministrador.invalid){
+    // Advertencia a falta de algún campo
+    if (this.formLoginAdministrador.invalid) {
       const alert = await this.alertCrl.create({
         header: 'Faltan datos',
         message: 'Tienes que rellenar campos',
@@ -46,37 +46,33 @@ export class LoginAdministradorPage implements OnInit {
       return;
     }
 
-    //Creación de estructura JSON para login
+    // Creación de estructura JSON para login
     var logAdmin = {
-      Usuario:  form.usuario,
+      Usuario: form.usuario,
       Contra: form.password
-    }
+    };
 
-    //Validación de credenciales
-    try{
-      const resp = await firstValueFrom(this.admService.loginAdmin(logAdmin));//llamada y transformación del servicio
+    // Validación de credenciales
+    try {
+      const resp = await firstValueFrom(this.admService.loginAdmin(logAdmin)); // llamada y transformación del servicio
 
-      if(resp.Usuario && resp.Contra){//¿La respuesta tiene estos campos?
-
-        this.navCtrl.navigateForward('/options'); //Si es así, redirección a pagina
-        this.formLoginAdministrador.reset();
-
-      }else{
+      if (resp.Usuario && resp.Contra) {
+        // Redirección a página si es válido
+        this.navCtrl.navigateForward('/options');
+      } else {
         throw new Error('Admin no encontrado');
       }
-
-    }catch (error){
-      //Toast de error
+    } catch (error) {
+      // Toast de error
       const toast = await this.toastCtrl.create({
         message: 'Credenciales incorrectas',
         duration: 3000,
         position: 'bottom'
       });
       toast.present();
-      
-      //Borrado de campos
+
+      // Borrado de campos
       this.formLoginAdministrador.reset();
     }
   }
-
 }

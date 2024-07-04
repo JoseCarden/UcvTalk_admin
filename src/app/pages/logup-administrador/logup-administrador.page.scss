@@ -56,3 +56,18 @@
     --color: #ffffff; /* Color del texto del botón */
   }
   
+    /* Estilo para el contenedor del botón de retroceso */
+.back-button-container {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  z-index: 100; /* Asegura que el botón esté por encima de otros elementos */
+}
+
+/* Estilo para el botón de retroceso */
+.back-button-container ion-button {
+  --background: transparent; /* Hace que el fondo del botón sea transparente */
+  --border: none; /* Elimina cualquier borde */
+  --color: white; /* Color de la flecha */
+  font-size: 24px; /* Tamaño de la flecha */
+}
