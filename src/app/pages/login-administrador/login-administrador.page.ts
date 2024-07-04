@@ -20,7 +20,6 @@ export class LoginAdministradorPage implements OnInit {
     public fb: FormBuilder
   ) {
     this.formLoginAdministrador = this.fb.group({
-      'correo': new FormControl('', Validators.required),
       'usuario': new FormControl('', Validators.required),
       'password': new FormControl('', Validators.required)
     });
@@ -49,7 +48,6 @@ export class LoginAdministradorPage implements OnInit {
 
     // Creación de estructura JSON para login
     var logAdmin = {
-      Correo: form.correo,
       Usuario: form.usuario,
       Contra: form.password
     };
@@ -58,7 +56,7 @@ export class LoginAdministradorPage implements OnInit {
     try {
       const resp = await firstValueFrom(this.admService.loginAdmin(logAdmin)); // llamada y transformación del servicio
 
-      if (resp.Correo && resp.Usuario && resp.Contra) {
+      if (resp.Usuario && resp.Contra) {
         // Redirección a página si es válido
         this.navCtrl.navigateForward('/options');
       } else {
