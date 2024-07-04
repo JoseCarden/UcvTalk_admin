@@ -174,19 +174,19 @@ ion-col {
 }
 
 ion-col:nth-child(1) {
-  flex: 1 0 10%; /* Ancho de la primera columna (ID) */
+  flex: 1 0 5%; /* Ancho de la primera columna (ID) */
 }
 
 ion-col:nth-child(2) {
-  flex: 1 0 25%; /* Ancho de la segunda columna (Nombre) */
+  flex: 1 0 20%; /* Ancho de la segunda columna (Nombre) */
 }
 
 ion-col:nth-child(3) {
-  flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
+  flex: 1 0 20%; /* Ancho de la tercera columna (Apellido) */
 }
 
 ion-col:nth-child(4) {
-  flex: 1 0 40%; /* Ancho de la cuarta columna (Especialidad) */
+  flex: 1 0 25%; /* Ancho de la cuarta columna (Especialidad) */
 }
 
 
@@ -232,7 +232,7 @@ ion-row {
 .filter-title {
   font-weight: bold; /* Texto en negrita para los títulos */
   margin-bottom: 6px; /* Espacio inferior entre los títulos y los inputs */
-  width: 70%; /* Ancho del título */
+  width: 80%; /* Ancho del título */
 }
 
 ion-item {
@@ -341,4 +341,11 @@ ion-col {
 
 .header-row ion-col:last-child, .data-row ion-col:last-child {
   border-right: none; /* Elimina el borde derecho de la última columna */
+}
+.data-row ion-col {
+  font-size: 15px; /* Tamaño de fuente para las celdas de datos */
+}
+
+.header-col {
+  font-size: 15px; /* Tamaño de fuente para los encabezados de columna */
 }
