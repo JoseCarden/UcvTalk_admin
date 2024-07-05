@@ -20,14 +20,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/logup-administrador/logup-administrador.module').then( m => m.LogupAdministradorPageModule)
   },
   {
-    path: 'login-administrador',
-    loadChildren: () => import('./pages/login-administrador/login-administrador.module').then( m => m.LoginAdministradorPageModule)
-  },
-  { 
-    path: 'logup-administrador',
-    loadChildren: () => import('./pages/logup-administrador/logup-administrador.module').then( m => m.LogupAdministradorPageModule)
-  },
-  {
     path: 'options',
     loadChildren: () => import('./pages/options/options.module').then( m => m.OptionsPageModule)
   },
