@@ -12,9 +12,7 @@
       <ion-title class="bold-title">Diagnóstico de Estudiantes</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <ion-label class="filter-title" style="text-align: center; display: block; width: 100%; margin-top: 20px; font-size: 24px;">FILTROS</ion-label>
-
   <ion-list lines="none" class="filter-container">
     <ion-item>
       <ion-label class="filter-title" position="stacked">ID Estudiante</ion-label>
@@ -22,13 +20,13 @@
     </ion-item>
     <ion-item>
       <ion-label class="filter-title" position="stacked" style="pointer-events: none;">Categoría</ion-label>
-      <ion-select placeholder="Seleccione la categoría" [(ngModel)]="diagnosticoFiltro" interface="popover" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+      <ion-select placeholder="Seleccione la categoría" [(ngModel)]="diagnosticoFiltro" interface="popover" style="color: rgb(0, 0, 0);
+      background-color: rgb(255, 255, 255);">
         <ion-select-option value="">Ninguno</ion-select-option>
         <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.Nombre_Cat">{{ categoria.Nombre_Cat }}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
-
   <ion-label class="filter-title" style="text-align: center; display: block; width: 100%; font-size: 24px;">TABLA</ion-label>
   <ion-grid id="pdfTable" class="custom-table">
     <ion-row class="header-row">
@@ -37,7 +35,6 @@
       <ion-col class="header-col">Categoria</ion-col>
       <ion-col class="header-col">Diagnóstico</ion-col>
     </ion-row>
-  
     <ion-row *ngFor="let diagnostico of combinarDatos()" class="data-row">
       <ion-col>{{ diagnostico.idUcv_estu }}</ion-col>
       <ion-col>{{ diagnostico.Est_Usuario }}</ion-col>
@@ -45,7 +42,6 @@
       <ion-col>{{ diagnostico.Diagnostico }}</ion-col>
     </ion-row>
   </ion-grid>
-  
-  
   <ion-button class="imprimir-button" expand="full" (click)="imprimir()">IMPRIMIR</ion-button>
 </ion-content>
+

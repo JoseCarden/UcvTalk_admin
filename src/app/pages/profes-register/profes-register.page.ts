@@ -21,10 +21,6 @@ export class ProfesRegisterPage implements OnInit {
     this.loadProfesionales();
   }
 
-  goToOptions() {
-    this.navCtrl.navigateForward('/options');
-  }
-
   goBack() {
     this.navCtrl.back();
   }
@@ -51,12 +47,8 @@ export class ProfesRegisterPage implements OnInit {
 
   imprimir() {
     const doc = new jsPDF();
-
-    // Title
     doc.setFontSize(18);
     doc.text('Registro de Profesionales', 105, 20, { align: 'center' });
-
-    // Table
     const data = this.filtrarProfesionales().map(profesional => [
       profesional.Id_ProfesRegis,
       profesional.Nombre,
@@ -71,7 +63,6 @@ export class ProfesRegisterPage implements OnInit {
       theme: 'grid',
       headStyles: { fillColor: [255, 0, 0] },
       didDrawPage: function (data) {
-        // Footer
         const date = new Date();
         const dateStr = date.toLocaleDateString();
         const timeStr = date.toLocaleTimeString();

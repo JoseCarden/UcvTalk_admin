@@ -1,9 +1,7 @@
 <ion-content [fullscreen]="true">
   <video autoplay muted loop id="video-background" preload="auto">
     <source src="../assets/Videos/fondo8.mp4" type="video/mp4">
-    Tu navegador no soporta la etiqueta de video.
   </video>
-
   <ion-header>
     <ion-toolbar class="custom-toolbar">
       <ion-buttons slot="start">
@@ -14,18 +12,16 @@
       <ion-title class="bold-title">Incidencia Estudiante</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <ion-label class="filter-title" style="text-align: center; display: block; width: 100%; margin-top: 20px; font-size: 24px;">FILTROS</ion-label>
-
   <ion-list lines="none" class="filter-container">
     <ion-item>
       <ion-label class="filter-title" position="stacked">Descripción</ion-label>
       <ion-input placeholder="Ingrese la descripción" [(ngModel)]="descripcionFiltro"></ion-input>
     </ion-item>
     <ion-item>
-      <!-- Ajustamos el formato y diseño del ion-select -->
       <ion-label class="filter-title" position="stacked" style="pointer-events: none;">Asunto</ion-label>
-      <ion-select placeholder="Seleccione el asunto" [(ngModel)]="asuntoFiltro" interface="popover" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+      <ion-select placeholder="Seleccione el asunto" [(ngModel)]="asuntoFiltro" interface="popover" style="color: rgb(0, 0, 0);
+      background-color: rgb(255, 255, 255);">
         <ion-select-option value="">Ninguno</ion-select-option>
         <ion-select-option value="Chantaje">Chantaje</ion-select-option>
         <ion-select-option value="Información errónea">Información errónea</ion-select-option>
@@ -35,16 +31,13 @@
       </ion-select>
     </ion-item>
   </ion-list>
-  
   <ion-label class="filter-title" style="text-align: center; display: block; width: 100%; font-size: 24px;">TABLA</ion-label>
-
   <ion-grid class="custom-table">
     <ion-row class="header-row">
       <ion-col>ID</ion-col>
       <ion-col>Asunto</ion-col>
       <ion-col>Descripción</ion-col>
     </ion-row>
-
     <ion-row *ngFor="let reporte of filtrarReportes()" class="data-row">
       <ion-col>{{ reporte.Id_Reporte }}</ion-col>
       <ion-col>{{ reporte.Asunto }}</ion-col>

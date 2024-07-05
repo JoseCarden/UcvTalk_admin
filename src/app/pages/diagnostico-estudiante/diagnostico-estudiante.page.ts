@@ -3,14 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-
 @Component({
   selector: 'app-diagnostico-estudiante',
   templateUrl: './diagnostico-estudiante.page.html',
   styleUrls: ['./diagnostico-estudiante.page.scss'],
 })
 export class DiagnosticoEstudiantePage implements OnInit {
-
   diagnosticos: any[] = [];
   estudiantes: any[] = [];
   categorias: any[] = [];
@@ -18,14 +16,12 @@ export class DiagnosticoEstudiantePage implements OnInit {
   diagnosticoFiltro: string = '';
 
   constructor(private navCtrl: NavController, private http: HttpClient) { }
-
   ngOnInit() {
     this.loadDiagnosticos();
     this.loadEstudiantes();
-    this.loadCategorias(); // Cargar categorías al inicializar el componente
-    this.diagnosticoFiltro = ''; // Establecer el filtro inicialmente a 'Ninguno'
+    this.loadCategorias();
+    this.diagnosticoFiltro = '';
   }
-
   goBack() {
     this.navCtrl.back();
   }
@@ -58,8 +54,8 @@ export class DiagnosticoEstudiantePage implements OnInit {
     return this.diagnosticos.filter(diagnostico => {
       const estudiante = this.estudiantes.find(est => est.Id_EstudianteRegis === diagnostico.Id_EstudianteRegis);
       const matchesUsuario = estudiante ? estudiante.idUcv_estu.toLowerCase().includes(this.usuarioFiltro.toLowerCase()) : false;
-      const categoria = this.categorias.find(cat => cat.Nombre_Cat === this.diagnosticoFiltro); // Buscar la categoría seleccionada
-      const categoriaId = categoria ? categoria.Id_Categoria : null; // Obtener el Id_Categoria si se encontró la categoría
+      const categoria = this.categorias.find(cat => cat.Nombre_Cat === this.diagnosticoFiltro);
+      const categoriaId = categoria ? categoria.Id_Categoria : null;
   
       if (!categoriaId) {
         return matchesUsuario;
@@ -83,12 +79,9 @@ export class DiagnosticoEstudiantePage implements OnInit {
 
   imprimir() {
     const doc = new jsPDF();
-  
-    // Title
     doc.setFontSize(18);
     doc.text('Diagnóstico de Estudiantes', 105, 20, { align: 'center' });
-  
-    // Table
+
     const data = this.combinarDatos().map(diagnostico => [
       diagnostico.idUcv_estu,
       diagnostico.Est_Usuario,
@@ -103,7 +96,6 @@ export class DiagnosticoEstudiantePage implements OnInit {
       theme: 'grid',
       headStyles: { fillColor: [255, 0, 0] },
       didDrawPage: function (data) {
-        // Footer
         const date = new Date();
         const dateStr = date.toLocaleDateString();
         const timeStr = date.toLocaleTimeString();

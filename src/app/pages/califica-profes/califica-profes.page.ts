@@ -36,7 +36,7 @@ export class CalificaProfesPage implements OnInit {
   createPieChart(counts: { [key: string]: number }) {
     const labels = Object.keys(counts).map(key => `${key} (${counts[key]})`);
     const data = Object.values(counts);
-  
+
     const ctx = document.getElementById('myPieChart') as HTMLCanvasElement;
     const myPieChart = new Chart(ctx, {
       type: 'pie',
@@ -69,7 +69,7 @@ export class CalificaProfesPage implements OnInit {
           },
           legend: {
             labels: {
-              color: 'white',
+              color: 'black',
             }
           }
         }
@@ -85,6 +85,7 @@ export class CalificaProfesPage implements OnInit {
         const doc = new jsPDF();
 
         doc.setFontSize(18);
+        doc.setTextColor(0, 0, 0);  // Set text color to black
         doc.text('GRAFICO DE CALIFICACIONES', 105, 20, { align: 'center' });
 
         const imgProps = doc.getImageProperties(imgData);
@@ -105,7 +106,7 @@ export class CalificaProfesPage implements OnInit {
         doc.setFontSize(10);
         doc.text(text, textX, positionY + imgHeight + 20);
 
-        doc.save('grafico.pdf');
+        doc.save('GraficoCalifica.pdf');
       });
     } else {
       console.error("El contenedor del gráfico no fue encontrado.");
@@ -115,5 +116,4 @@ export class CalificaProfesPage implements OnInit {
   goBack() {
     this.navCtrl.back();
   }
-
 }

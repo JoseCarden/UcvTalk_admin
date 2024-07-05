@@ -3,20 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-
 @Component({
   selector: 'app-reporte-estudiante-profes',
   templateUrl: './reporte-estudiante.page.html',
   styleUrls: ['./reporte-estudiante.page.scss'],
 })
 export class ReporteEstudiantePage implements OnInit {
-
   reportes: any[] = [];
   descripcionFiltro: string = '';
   asuntoFiltro: string = '';
 
   constructor(private http: HttpClient, private navCtrl: NavController) { }
-
   ngOnInit() {
     this.loadReportes();
   }
@@ -48,11 +45,8 @@ export class ReporteEstudiantePage implements OnInit {
   imprimir() {
     const doc = new jsPDF();
 
-    // Title
     doc.setFontSize(18);
-    doc.text('Reporte de Estudiantes', 105, 20, { align: 'center' });
-
-    // Table
+    doc.text('Incidencias de Estudiantes', 105, 20, { align: 'center' });
     const data = this.filtrarReportes().map(reporte => [
       reporte.Id_Reporte,
       reporte.Descripcion,
@@ -66,7 +60,6 @@ export class ReporteEstudiantePage implements OnInit {
       theme: 'grid',
       headStyles: { fillColor: [255, 0, 0] },
       didDrawPage: function (data) {
-        // Footer
         const date = new Date();
         const dateStr = date.toLocaleDateString();
         const timeStr = date.toLocaleTimeString();
@@ -78,6 +71,6 @@ export class ReporteEstudiantePage implements OnInit {
       }
     });
 
-    doc.save('ReporteEstudiantes.pdf');
+    doc.save('IncidentesEstudiantes.pdf');
   }
 }
