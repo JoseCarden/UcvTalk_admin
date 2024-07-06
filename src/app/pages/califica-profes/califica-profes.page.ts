@@ -69,7 +69,7 @@ export class CalificaProfesPage implements OnInit {
           },
           legend: {
             labels: {
-              color: 'white',
+              color: 'black',
             }
           }
         }

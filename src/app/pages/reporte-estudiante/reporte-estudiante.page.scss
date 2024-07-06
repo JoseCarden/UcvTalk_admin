@@ -181,7 +181,7 @@ ion-col:nth-child(2) {
 }
 
 ion-col:nth-child(3) {
-  flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
+  flex: 1 0 35%; /* Ancho de la tercera columna (Apellido) */
 }
 
 /* Alinear el texto verticalmente al centro */
@@ -228,7 +228,7 @@ ion-row {
 .filter-title {
   font-weight: bold; /* Texto en negrita para los títulos */
   margin-bottom: 6px; /* Espacio inferior entre los títulos y los inputs */
-  width: 70%; /* Ancho del título */
+  width: 80%; /* Ancho del título */
 }
 
 ion-item {
@@ -269,7 +269,7 @@ ion-col {
 }
 
 ion-col:nth-child(1) {
-  flex: 1 0 10%; /* Ancho de la primera columna (ID) */
+  flex: 1 0 8%; /* Ancho de la primera columna (ID) */
 }
 
 ion-col:nth-child(2) {
@@ -277,7 +277,7 @@ ion-col:nth-child(2) {
 }
 
 ion-col:nth-child(3) {
-  flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
+  flex: 1 0 35%; /* Ancho de la tercera columna (Apellido) */
 }
 
 
