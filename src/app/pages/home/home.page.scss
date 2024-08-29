@@ -1,40 +1,29 @@
-#video-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Esto asegura que el video cubra toda el área */
-  z-index: -1; /* Envía el video al fondo */
-}
-
 ion-content {
-  position: relative;
-  z-index: 1; /* Ensure the content is in front of the video */
-}
+  --background: linear-gradient(to bottom, #f5f5dc, #d4b483);     
+  }
 
-.button-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height:100%;
-  position: relative;
-  z-index: 1;
-  margin-top: 23vh; /* Ajusta la distancia desde la parte superior */
-}
-
-
-.button-container ion-button {
-  margin: 20px;
-  width: 65%;
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: fixed; /* Make the buttons stay in place */
+    z-index: 1;
+    margin-top: 30vh; /* Ajusta la distancia desde la parte superior */
+    left: 25%; /* Ajusta esta propiedad para mover los botones a la derecha */
+  }
+  
+  .button-container ion-button {
+    margin: 20px;
+    width: 120%;
   }
   
 .button-container ion-button.button-solid {
---background: rgb(52, 48, 165) !important; /* Sobrescribe el color de fondo a rojo */
---color: white !important; /* Sobrescribe el color del texto a blanco */
+--background: rgba(52, 48, 165, 0.373) !important; /* Sobrescribe el color de fondo a rojo */
+--color: rgb(0, 0, 0) !important; /* Sobrescribe el color del texto a blanco */
 }
 
 .button-container ion-button.button-solid:hover {
---background: rgb(255, 0, 0) !important; /* Cambia el color de fondo al pasar el mouse */
+--background: rgba(47, 44, 57, 0.571) !important; /* Cambia el color de fondo al pasar el mouse */
 }

@@ -1,18 +1,6 @@
-/* Custom styles for video background */
-#video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    animation: moveBackground 10s linear infinite alternate;
-  }
   
   ion-content {
-    position: relative;
-    z-index: 1; /* Ensure the content is in front of the video */
+    --background: linear-gradient(to bottom, #f5f5dc, #d4b483);     
   }
   
   .button-container {
@@ -30,24 +18,15 @@
     font-size: 1.5em;
     margin-top: 3em;
     margin-bottom: 1em;
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: bold; /* Aplica negrita al título */
   }
   
   .data-label {
-    width: 25%;
+    width: 35%;
     font-weight: bold;
     text-align: center;
     transform: translate(0, -160px); /* Ajusta según sea necesario */
-  }
-  
-  .data-label1 {
-    width: 25%;
-    text-align: center;
-    transform: translate(0, -160px); /* Ajusta según sea necesario */
-    font-size: 9em; /* Ajusta el tamaño de la letra según tus necesidades */
-    font-weight: bold; /* Hace que el texto sea negrita */
-    padding: 10px; /* Opcional: Añade un poco de espacio interno para que el borde no esté pegado al texto */
   }
   
   .button-container ion-button {
@@ -73,12 +52,12 @@
   }
   
   .button-container ion-button.button-solid {
-    --background: rgb(52, 48, 165) !important; /* Sobrescribe el color de fondo */
+    --background: rgba(33, 27, 210, 0.708) !important; /* Sobrescribe el color de fondo */
     --color: white !important; /* Sobrescribe el color del texto */
   }
   
   .button-container ion-button.button-solid:hover {
-    --background: rgb(255, 0, 0) !important; /* Cambia el color de fondo al pasar el mouse */
+    --background: rgba(255, 0, 0, 0.516) !important; /* Cambia el color de fondo al pasar el mouse */
   }
   
   .button-icon {
@@ -114,6 +93,6 @@
   .back-button-container ion-button {
     --background: transparent; /* Hace que el fondo del botón sea transparente */
     --border: none; /* Elimina cualquier borde */
-    --color: white; /* Color de la flecha */
+    --color: rgb(0, 0, 0); /* Color de la flecha */
     font-size: 18px; /* Tamaño de la flecha */
   }
