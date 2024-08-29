@@ -1,14 +1,3 @@
-/* Custom styles for video background */
-#video-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  animation: moveBackground 10s linear infinite alternate;
-}
 
 ion-content {
   
