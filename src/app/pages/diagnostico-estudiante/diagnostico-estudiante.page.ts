@@ -14,57 +14,57 @@ export class DiagnosticoEstudiantePage implements OnInit {
   diagnosticos: any[] = [];
   estudiantes: any[] = [];
   categorias: any[] = [];
-  usuarioFiltro: string = '';
-  diagnosticoFiltro: string = '';
+  filtroUsuario: string = '';
+  filtroDiagnostico: string = '';
 
   constructor(private navCtrl: NavController, private http: HttpClient) { }
 
   ngOnInit() {
-    this.loadDiagnosticos();
-    this.loadEstudiantes();
-    this.loadCategorias(); // Cargar categorías al inicializar el componente
-    this.diagnosticoFiltro = ''; // Establecer el filtro inicialmente a 'Ninguno'
+    this.cargarDiagnosticos();
+    this.cargarEstudiantes();
+    this.cargarCategorias(); // Cargar categorías al inicializar el componente
+    this.filtroDiagnostico = ''; // Establecer el filtro inicialmente a 'Ninguno'
   }
 
-  goBack() {
+  regresar() {
     this.navCtrl.back();
   }
 
-  loadDiagnosticos() {
+  cargarDiagnosticos() {
     this.http.get('http://localhost:3000/diagnostico').subscribe((data: any) => {
       this.diagnosticos = data;
     }, error => {
-      console.error('Error loading diagnosticos', error);
+      console.error('Error cargando diagnósticos', error);
     });
   }
 
-  loadEstudiantes() {
+  cargarEstudiantes() {
     this.http.get('http://localhost:3000/estudiante').subscribe((data: any) => {
       this.estudiantes = data;
     }, error => {
-      console.error('Error loading estudiantes', error);
+      console.error('Error cargando estudiantes', error);
     });
   }
 
-  loadCategorias() {
+  cargarCategorias() {
     this.http.get('http://localhost:3000/categoria').subscribe((data: any) => {
       this.categorias = data;
     }, error => {
-      console.error('Error loading categorias', error);
+      console.error('Error cargando categorías', error);
     });
   }
 
   filtrarDiagnosticos() {
     return this.diagnosticos.filter(diagnostico => {
       const estudiante = this.estudiantes.find(est => est.Id_EstudianteRegis === diagnostico.Id_EstudianteRegis);
-      const matchesUsuario = estudiante ? estudiante.idUcv_estu.toLowerCase().includes(this.usuarioFiltro.toLowerCase()) : false;
-      const categoria = this.categorias.find(cat => cat.Nombre_Cat === this.diagnosticoFiltro); // Buscar la categoría seleccionada
-      const categoriaId = categoria ? categoria.Id_Categoria : null; // Obtener el Id_Categoria si se encontró la categoría
+      const coincideUsuario = estudiante ? estudiante.idUcv_estu.toLowerCase().includes(this.filtroUsuario.toLowerCase()) : false;
+      const categoria = this.categorias.find(cat => cat.Nombre_Cat === this.filtroDiagnostico); // Buscar la categoría seleccionada
+      const idCategoria = categoria ? categoria.Id_Categoria : null; // Obtener el Id_Categoria si se encontró la categoría
   
-      if (!categoriaId) {
-        return matchesUsuario;
+      if (!idCategoria) {
+        return coincideUsuario;
       } else {
-        return matchesUsuario && diagnostico.Id_Categoria === categoriaId;
+        return coincideUsuario && diagnostico.Id_Categoria === idCategoria;
       }
     });
   }
@@ -84,12 +84,12 @@ export class DiagnosticoEstudiantePage implements OnInit {
   imprimir() {
     const doc = new jsPDF();
   
-    // Title
+    // Título
     doc.setFontSize(18);
     doc.text('Diagnóstico de Estudiantes', 105, 20, { align: 'center' });
   
-    // Table
-    const data = this.combinarDatos().map(diagnostico => [
+    // Tabla
+    const datos = this.combinarDatos().map(diagnostico => [
       diagnostico.idUcv_estu,
       diagnostico.Est_Usuario,
       diagnostico.Id_Categoria,
@@ -98,20 +98,20 @@ export class DiagnosticoEstudiantePage implements OnInit {
   
     autoTable(doc, {
       head: [['ID E.', 'Estado Usuario', 'Categoría', 'Diagnóstico']],
-      body: data,
+      body: datos,
       startY: 30,
       theme: 'grid',
       headStyles: { fillColor: [255, 0, 0] },
       didDrawPage: function (data) {
-        // Footer
+        // Pie de página
         const date = new Date();
         const dateStr = date.toLocaleDateString();
         const timeStr = date.toLocaleTimeString();
-        const text = `Fecha de descarga: ${dateStr}  |  Hora de descarga: ${timeStr}`;
-        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor;
+        const texto = `Fecha de descarga: ${dateStr}  |  Hora de descarga: ${timeStr}`;
+        const textWidth = doc.getStringUnitWidth(texto) * 18 / doc.internal.scaleFactor;
         const textX = (doc.internal.pageSize.getWidth() - textWidth) / 2;
         doc.setFontSize(10);
-        doc.text(text, textX, doc.internal.pageSize.getHeight() - 10);
+        doc.text(texto, textX, doc.internal.pageSize.getHeight() - 10);
       }
     });
   

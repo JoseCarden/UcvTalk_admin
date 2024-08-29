@@ -15,36 +15,36 @@ export class CalificaProfesPage implements OnInit {
   constructor(private http: HttpClient, private navCtrl: NavController) { }
 
   ngOnInit() {
-    this.getDataAndCreatePieChart();
+    this.obtenerDatosYCrearGraficoDeTarta();
   }
 
-  getDataAndCreatePieChart() {
-    this.http.get<any[]>('http://localhost:3000/calificar-profe').subscribe(data => {
-      const calificaciones = data.map(item => item.Calificacion);
-      const counts = this.countOccurrences(calificaciones);
-      this.createPieChart(counts);
+  obtenerDatosYCrearGraficoDeTarta() {
+    this.http.get<any[]>('http://localhost:3000/calificar-profe').subscribe(datos => {
+      const calificaciones = datos.map(item => item.Calificacion);
+      const conteos = this.contarOcurrencias(calificaciones);
+      this.crearGraficoDeTarta(conteos);
     });
   }
 
-  countOccurrences(arr: any[]): { [key: string]: number } {
-    return arr.reduce((acc, val) => {
-      acc[val] = acc[val] ? acc[val] + 1 : 1;
-      return acc;
+  contarOcurrencias(arr: any[]): { [key: string]: number } {
+    return arr.reduce((acumulador, valor) => {
+      acumulador[valor] = acumulador[valor] ? acumulador[valor] + 1 : 1;
+      return acumulador;
     }, {});
   }
 
-  createPieChart(counts: { [key: string]: number }) {
-    const labels = Object.keys(counts).map(key => `${key} (${counts[key]})`);
-    const data = Object.values(counts);
+  crearGraficoDeTarta(conteos: { [key: string]: number }) {
+    const etiquetas = Object.keys(conteos).map(key => `${key} (${conteos[key]})`);
+    const datos = Object.values(conteos);
   
-    const ctx = document.getElementById('myPieChart') as HTMLCanvasElement;
-    const myPieChart = new Chart(ctx, {
+    const ctx = document.getElementById('graficoDeTarta') as HTMLCanvasElement;
+    const miGraficoDeTarta = new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: labels,
+        labels: etiquetas,
         datasets: [{
           label: 'Calificaciones',
-          data: data,
+          data: datos,
           backgroundColor: [
             'red',
             'blue',
@@ -61,9 +61,9 @@ export class CalificaProfesPage implements OnInit {
           tooltip: {
             callbacks: {
               label: (context) => {
-                const label = context.label || '';
-                const value = context.parsed || 0;
-                return `${label}: ${value}`;
+                const etiqueta = context.label || '';
+                const valor = context.parsed || 0;
+                return `${etiqueta}: ${valor}`;
               }
             }
           },
@@ -78,32 +78,32 @@ export class CalificaProfesPage implements OnInit {
   }
 
   imprimir() {
-    const chartContainer = document.getElementById('myPieChartContainer');
-    if (chartContainer) {
-      html2canvas(chartContainer).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
+    const contenedorGrafico = document.getElementById('contenedorGraficoDeTarta');
+    if (contenedorGrafico) {
+      html2canvas(contenedorGrafico).then(canvas => {
+        const datosImagen = canvas.toDataURL('image/png');
         const doc = new jsPDF();
 
         doc.setFontSize(18);
-        doc.text('GRAFICO DE CALIFICACIONES', 105, 20, { align: 'center' });
+        doc.text('GRÁFICO DE CALIFICACIONES', 105, 20, { align: 'center' });
 
-        const imgProps = doc.getImageProperties(imgData);
-        const pdfWidth = doc.internal.pageSize.getWidth();
-        const pdfHeight = doc.internal.pageSize.getHeight();
-        const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        const propiedadesImagen = doc.getImageProperties(datosImagen);
+        const anchoPDF = doc.internal.pageSize.getWidth();
+        const altoPDF = doc.internal.pageSize.getHeight();
+        const altoImagen = (propiedadesImagen.height * anchoPDF) / propiedadesImagen.width;
 
-        const positionY = 33;
+        const posicionY = 33;
 
-        doc.addImage(imgData, 'PNG', 10, positionY, pdfWidth - 20, imgHeight);
+        doc.addImage(datosImagen, 'PNG', 10, posicionY, anchoPDF - 20, altoImagen);
 
-        const date = new Date();
-        const dateStr = date.toLocaleDateString();
-        const timeStr = date.toLocaleTimeString();
-        const text = `Fecha de descarga: ${dateStr}  |  Hora de descarga: ${timeStr}`;
-        const textWidth = doc.getStringUnitWidth(text) * 18 / doc.internal.scaleFactor;
-        const textX = (pdfWidth - textWidth) / 2;
+        const fecha = new Date();
+        const fechaStr = fecha.toLocaleDateString();
+        const horaStr = fecha.toLocaleTimeString();
+        const texto = `Fecha de descarga: ${fechaStr}  |  Hora de descarga: ${horaStr}`;
+        const anchoTexto = doc.getStringUnitWidth(texto) * 18 / doc.internal.scaleFactor;
+        const textoX = (anchoPDF - anchoTexto) / 2;
         doc.setFontSize(10);
-        doc.text(text, textX, positionY + imgHeight + 20);
+        doc.text(texto, textoX, posicionY + altoImagen + 20);
 
         doc.save('grafico.pdf');
       });
@@ -112,7 +112,7 @@ export class CalificaProfesPage implements OnInit {
     }
   }
 
-  goBack() {
+  regresar() {
     this.navCtrl.back();
   }
 

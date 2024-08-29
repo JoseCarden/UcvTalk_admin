@@ -1,13 +1,8 @@
-<ion-content [fullscreen]="true">
-  <video autoplay muted loop id="video-background" preload="auto">
-    <source src="../assets/Videos/fondo8.mp4" type="video/mp4">
-    Tu navegador no soporta la etiqueta de video.
-  </video>
-
+<ion-content [fullscreen]="true" style="--background: red;">
   <ion-header>
     <ion-toolbar class="custom-toolbar">
       <ion-buttons slot="start">
-        <ion-button (click)="goBack()">
+        <ion-button (click)="regresar()">
           <ion-icon name="arrow-back"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -23,7 +18,6 @@
       <ion-input placeholder="Ingrese la descripción" [(ngModel)]="descripcionFiltro"></ion-input>
     </ion-item>
     <ion-item>
-      <!-- Ajustamos el formato y diseño del ion-select -->
       <ion-label class="filter-title" position="stacked" style="pointer-events: none;">Asunto</ion-label>
       <ion-select placeholder="Seleccione el asunto" [(ngModel)]="asuntoFiltro" interface="popover" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
         <ion-select-option value="">Ninguno</ion-select-option>

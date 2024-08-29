@@ -247,61 +247,22 @@ ion-input {
   padding: 10px; /* Espaciado interno */
   border: 1px solid #ffffff; /* Borde ligero */
   border-radius: 5px; /* Bordes redondeados */
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1); /* Borde interior suave */
-  color: #000000; /* Color del texto negro */
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1); 
+  color: #000000;
 }
 
 ion-input::placeholder {
-  color: #999999; /* Color del placeholder gris */
+  color: #999999;
 }
 
 .custom-table {
-  margin-top: 20px; /* Espacio superior para separar de los filtros */
+  margin-top: 20px;
 }
 
 .imprimir-button:hover {
-  --background: rgb(255, 0, 0); /* Cambia el color de fondo al pasar el mouse */
+  --background: rgb(255, 0, 0); 
 }
 
-// ion-select {
-//   --color: black; /* Cambia el color del texto de las opciones */
-// }
-
-// ion-select-option {
-//   color: inherit; /* Asegura que herede el color del ion-select */
-// }
-
-
-// ion-col {
-//   padding: 8px; /* Espacio interno en las celdas */
-//   font-weight: bold; /* Aplica negrita al texto de las celdas */
-// }
-
-// ion-col:nth-child(1) {
-//   flex: 1 0 10%; /* Ancho de la primera columna (ID) */
-// }
-
-// ion-col:nth-child(2) {
-//   flex: 1 0 25%; /* Ancho de la segunda columna (Nombre) */
-// }
-
-// ion-col:nth-child(3) {
-//   flex: 1 0 25%; /* Ancho de la tercera columna (Apellido) */
-// }
-
-// ion-col:nth-child(4) {
-//   flex: 1 0 40%; /* Ancho de la tercera columna (Apellido) */
-// }
-
-
-
-
-
-
-
-
-
-/* Alinear el texto verticalmente al centro */
 ion-col {
   display: flex;
   align-items: center;

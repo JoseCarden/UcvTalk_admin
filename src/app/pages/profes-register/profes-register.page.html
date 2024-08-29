@@ -1,7 +1,4 @@
-<ion-content [fullscreen]="true">
-  <video autoplay muted loop id="video-background" preload="auto">
-    <source src="../assets/Videos/fondo8.mp4" type="video/mp4">
-  </video>
+<ion-content [fullscreen]="true" style="--background: red;">
   <ion-header>
     <ion-toolbar class="custom-toolbar">
       <ion-buttons slot="start">
@@ -35,7 +32,6 @@
       </ion-select>
     </ion-item>
   </ion-list>
-  
 
   <!-- Texto "TABLA" centrado encima de la tabla y tamaño grande -->
   <ion-label class="filter-title" style="text-align: center; display: block; width: 100%; font-size: 24px;">TABLA</ion-label>
@@ -57,4 +53,3 @@
   </ion-grid>
   <ion-button class="imprimir-button" expand="full" (click)="imprimir()">IMPRIMIR</ion-button>
 </ion-content>
-

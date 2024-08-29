@@ -1,20 +1,20 @@
-<ion-content [fullscreen]="true">
-  <video autoplay muted loop id="video-background" preload="auto">
-    <source src="../assets/Videos/fondo8.mp4" type="video/mp4">
-  </video>
+<ion-content [fullscreen]="true" style="--background: red;">
   <ion-header>
     <ion-toolbar class="custom-toolbar">
       <ion-buttons slot="start">
-        <ion-button (click)="goBack()">
+        <ion-button (click)="regresar()">
           <ion-icon name="arrow-back"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title class="bold-title">Calificacion Profesionales</ion-title>
+      <ion-title class="bold-title">Calificación Profesionales</ion-title>
     </ion-toolbar>
   </ion-header>
-  <h1 class="title">GRAFICO</h1>
-  <div id="myPieChartContainer" class="chart-container">
-    <canvas id="myPieChart"></canvas>
+  
+  <h1 class="title">GRÁFICO</h1>
+  
+  <div id="contenedorGraficoDeTarta" class="chart-container">
+    <canvas id="graficoDeTarta"></canvas>
   </div>
+  
   <ion-button class="imprimir-button" expand="full" (click)="imprimir()">IMPRIMIR</ion-button>
 </ion-content>

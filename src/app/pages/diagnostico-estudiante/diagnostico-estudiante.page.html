@@ -1,11 +1,8 @@
-<ion-content [fullscreen]="true">
-  <video autoplay muted loop id="video-background" preload="auto">
-    <source src="../assets/Videos/fondo8.mp4" type="video/mp4">
-  </video>
+<ion-content [fullscreen]="true" style="--background: red;">
   <ion-header>
     <ion-toolbar class="custom-toolbar">
       <ion-buttons slot="start">
-        <ion-button (click)="goBack()">
+        <ion-button (click)="regresar()">
           <ion-icon name="arrow-back"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -18,11 +15,11 @@
   <ion-list lines="none" class="filter-container">
     <ion-item>
       <ion-label class="filter-title" position="stacked">ID Estudiante</ion-label>
-      <ion-input placeholder="Ingrese ID Estudiante" [(ngModel)]="usuarioFiltro"></ion-input>
+      <ion-input placeholder="Ingrese ID Estudiante" [(ngModel)]="filtroUsuario"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label class="filter-title" position="stacked" style="pointer-events: none;">Categoría</ion-label>
-      <ion-select placeholder="Seleccione la categoría" [(ngModel)]="diagnosticoFiltro" interface="popover" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+      <ion-select placeholder="Seleccione la categoría" [(ngModel)]="filtroDiagnostico" interface="popover" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
         <ion-select-option value="">Ninguno</ion-select-option>
         <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.Nombre_Cat">{{ categoria.Nombre_Cat }}</ion-select-option>
       </ion-select>
@@ -34,7 +31,7 @@
     <ion-row class="header-row">
       <ion-col class="header-col">ID E.</ion-col>
       <ion-col class="header-col">E.U.</ion-col>
-      <ion-col class="header-col">Categoria</ion-col>
+      <ion-col class="header-col">Categoría</ion-col>
       <ion-col class="header-col">Diagnóstico</ion-col>
     </ion-row>
   
@@ -45,7 +42,6 @@
       <ion-col>{{ diagnostico.Diagnostico }}</ion-col>
     </ion-row>
   </ion-grid>
-  
   
   <ion-button class="imprimir-button" expand="full" (click)="imprimir()">IMPRIMIR</ion-button>
 </ion-content>
